@@ -422,6 +422,106 @@ def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
+def _norm_hint_text(value: Any) -> str:
+    return " ".join(str(value or "").split()).casefold()
+
+
+def _page_title(item: dict[str, Any]) -> str:
+    return str((item.get("signals") or {}).get("title") or (item.get("page") or {}).get("title") or "")
+
+
+def _heading_pairs(item: dict[str, Any]) -> list[tuple[str, str]]:
+    outline = (((item.get("page") or {}).get("structure") or {}).get("landmarks") or {}).get("headingOutline") or []
+    pairs: list[tuple[str, str]] = []
+    for row in outline:
+        if isinstance(row, dict):
+            pairs.append((str(row.get("tag") or ""), str(row.get("text") or "")))
+    return pairs
+
+
+def _h1_repeats_as_h2(item: dict[str, Any]) -> bool:
+    pairs = _heading_pairs(item)
+    h1s = {_norm_hint_text(text) for tag, text in pairs if tag.upper() == "H1" and text.strip()}
+    h2s = {_norm_hint_text(text) for tag, text in pairs if tag.upper() == "H2" and text.strip()}
+    return bool(h1s & h2s)
+
+
+def _count_within_budget(item: dict[str, Any], key: str) -> bool:
+    visual = (item.get("page") or {}).get("visual") or {}
+    count = (visual.get("counts") or {}).get(key)
+    budget = (visual.get("budgets") or {}).get(key)
+    if not isinstance(count, int) or not isinstance(budget, int):
+        return True
+    return count <= budget
+
+
+def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]:
+    """Drop LLM hints that contradict measured titles, headings, or GUI budgets."""
+    titles = {_norm_hint_text(_page_title(item)) for item in pages if _page_title(item)}
+    home = next(
+        (
+            item
+            for item in pages
+            if ((item.get("page") or {}).get("page") or {}).get("kind") == "landing"
+        ),
+        pages[0] if pages else None,
+    )
+    home_title = _norm_hint_text(_page_title(home)) if home else ""
+    form_titles = [
+        _norm_hint_text(_page_title(item))
+        for item in pages
+        if ((item.get("signals") or {}).get("formCount") or 0)
+        or ((item.get("page") or {}).get("page") or {}).get("kind") == "form"
+    ]
+    form_titles = [title for title in form_titles if title]
+    contact_distinct = bool(form_titles) and all(title != home_title for title in form_titles)
+    any_heading_dup = any(_h1_repeats_as_h2(item) for item in pages)
+    colors_ok = all(_count_within_budget(item, "colors") for item in pages) if pages else True
+    sizes_ok = all(_count_within_budget(item, "fontSizes") for item in pages) if pages else True
+
+    kept: list[str] = []
+    for raw in hints:
+        text = str(raw or "").strip()
+        if not text:
+            continue
+        folded = _norm_hint_text(text)
+        proposed = re.findall(
+            r"(?:set[^\n]{0,40}title[^\n]{0,40}|title to|title like)\s+['\"]([^'\"]+)['\"]",
+            text,
+            flags=re.I,
+        )
+        if proposed and any(_norm_hint_text(value) in titles for value in proposed):
+            continue
+        if contact_distinct and (
+            "identical to home" in folded
+            or ("seo-title-001" in folded and "identical" in folded)
+            or ("contact page title" in folded and "identical" in folded)
+        ):
+            continue
+        if not any_heading_dup and (
+            "a11y-heading-001" in folded
+            or "duplicate h2 matching h1" in folded
+            or ("h1" in folded and "h2" in folded and "identical" in folded)
+        ):
+            continue
+        if colors_ok and (
+            "gui-vis-001" in folded
+            or re.search(r"color count \d+ exceeds budget", folded)
+            or "exceeds color budget" in folded
+            or "extract 6 core brand colors" in folded
+        ):
+            continue
+        if sizes_ok and (
+            "gui-vis-002" in folded
+            or re.search(r"font-size count \d+ exceeds budget", folded)
+            or "consolidate 5 font sizes" in folded
+        ):
+            continue
+        if text not in kept:
+            kept.append(text)
+    return kept
+
+
 def apply_judgment(pages: list[dict[str, Any]], judgment: dict[str, Any]) -> None:
     by_url = {item["url"]: item for item in pages}
     for judged in judgment.get("pages") or []:
@@ -698,7 +798,7 @@ def main() -> int:
     if judgment:
         apply_judgment(pages, judgment)
         findings.extend(judgment.get("siteFindings") or [])
-        hints = list(judgment.get("hints") or [])
+        hints = drop_stale_hints(pages, list(judgment.get("hints") or []))
     for item in pages:
         for lens_id, lens_findings in (item.get("lenses") or {}).items():
             for defect in lens_findings:

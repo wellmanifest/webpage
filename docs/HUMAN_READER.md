@@ -13,8 +13,9 @@ The site audit is JSON, but you do not need to read it as a programmer.
 If `intentKind` ≠ `kind`, stop. Do not argue about fonts. The user opened the
 wrong surface. Kind and intent come from `wellmanifest/gui` `infer_kind`
 (URL + DOM + headings). SubLLM (`platform/site-audit`) may override them
-only when it emits a valid kind enum. Invented finding ids become hints.
-This pack does not hardcode product paths.
+only when it emits a valid kind enum. Invented finding ids become hints. Hints that contradict measured titles,
+headings, or GUI budgets are dropped. Leftover unofficial hints are not
+tickets. This pack does not hardcode product paths.
 
 ## Severity
 

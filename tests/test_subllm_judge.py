@@ -336,6 +336,77 @@ def test_parse_judgment_normalizes_live_wrapper() -> None:
     assert any("Isolate the contact form" in hint for hint in parsed["hints"])
 
 
+def test_drop_stale_hints_keeps_unresolved_and_drops_closed() -> None:
+    from audit_site import drop_stale_hints
+
+    pages = [
+        {
+            "url": "http://127.0.0.1:8789/",
+            "page": {
+                "title": "Subactor — platforma autonomizacji procesów biznesowych",
+                "page": {"kind": "landing"},
+                "structure": {
+                    "landmarks": {
+                        "headingOutline": [
+                            {"tag": "H1", "text": "Wybierz pakiet dla swojej organizacji"},
+                        ]
+                    }
+                },
+                "visual": {
+                    "budgets": {"fontFamilies": 3, "colors": 16, "fontSizes": 8},
+                    "counts": {"fontFamilies": 1, "colors": 10, "fontSizes": 5},
+                },
+            },
+            "signals": {
+                "title": "Subactor — platforma autonomizacji procesów biznesowych",
+                "formCount": 0,
+            },
+        },
+        {
+            "url": "http://127.0.0.1:8789/?action=contact",
+            "page": {
+                "title": "Kontakt — wdrożenie On-Premise | Subactor",
+                "page": {"kind": "form"},
+                "structure": {
+                    "landmarks": {
+                        "headingOutline": [
+                            {"tag": "H1", "text": "Zapytanie o wdrożenie On-Premise"},
+                            {"tag": "H2", "text": "Szczegóły instalacji"},
+                        ]
+                    }
+                },
+                "visual": {
+                    "budgets": {"fontFamilies": 2, "colors": 10, "fontSizes": 6},
+                    "counts": {"fontFamilies": 1, "colors": 10, "fontSizes": 5},
+                },
+            },
+            "signals": {
+                "title": "Kontakt — wdrożenie On-Premise | Subactor",
+                "formCount": 1,
+            },
+        },
+    ]
+    hints = [
+        "pages[/?action=contact].title: Set contact page title to 'Kontakt — wdrożenie On-Premise | Subactor'.",
+        "SEO-TITLE-001: Contact page title is identical to home page.",
+        "A11Y-HEADING-001: H1 and H2 are identical. Remove the duplicate H2.",
+        "pages[/?action=contact].structure: Remove duplicate H2 matching H1 text. Isolate contact form.",
+        "GUI-VIS-001: Color count 10 exceeds budget 6.",
+        "GUI-VIS-002: Font-size count 5 exceeds budget 4.",
+        "site.brand.colors: Extract 6 core brand colors from HOME page.",
+        "site.brand.typeScale: Consolidate 5 font sizes to 4.",
+        "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
+        "pages[/legal].structure: Add in-page table of contents.",
+        "SEO-TITLE-002: Home title is brand-generic while H1 is package-specific.",
+    ]
+    kept = drop_stale_hints(pages, hints)
+    assert kept == [
+        "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
+        "pages[/legal].structure: Add in-page table of contents.",
+        "SEO-TITLE-002: Home title is brand-generic while H1 is package-specific.",
+    ]
+
+
 def test_apply_judgment_keeps_observed_kind_and_budgets() -> None:
     from audit_site import apply_judgment
 

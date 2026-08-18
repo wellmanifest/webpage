@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.11] - 2026-08-19
+### Fixed
+- Drop LLM hints that contradict measured titles, H1/H2 text, or
+  `wellmanifest/gui` visual budgets. Closed contact-title work and invented
+  tighter palettes stay hints-out; leftover unofficial hints are not findings.
+
 ## [0.2.10] - 2026-08-18
 ### Fixed
 - Live `llm-judgment/v1` wrappers (`meta` + nested `page.kind`, `visualBudget`,
