@@ -67,6 +67,41 @@ def test_observation_findings_flag_canonical_contact_and_lang() -> None:
     assert pages[0]["lenses"]["seo"][0]["code"] == "WEB-SEO-001"
 
 
+def test_observation_findings_skip_contact_when_form_observed() -> None:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from audit_site import advertised_contact_targets, observation_findings
+
+    home = {
+        "url": "http://127.0.0.1:8789/",
+        "signals": {
+            "lang": "pl",
+            "canonical": "http://127.0.0.1:8789/",
+            "viewport": True,
+            "formCount": 0,
+            "footerLinks": ["/?action=contact"],
+            "navLinks": ["/?action=contact"],
+        },
+        "lenses": {"seo": [], "ux": [], "a11y": []},
+    }
+    contact = {
+        "url": "http://127.0.0.1:8789/?action=contact",
+        "signals": {
+            "lang": "pl",
+            "canonical": "http://127.0.0.1:8789/",
+            "viewport": True,
+            "formCount": 1,
+            "footerLinks": ["/?action=contact"],
+            "navLinks": [],
+        },
+        "lenses": {"seo": [], "ux": [], "a11y": []},
+    }
+    codes = {row["code"] for row in observation_findings([home, contact])}
+    assert "WEB-UX-001" not in codes
+    assert advertised_contact_targets([home], "http://127.0.0.1:8789/") == [
+        "http://127.0.0.1:8789/?action=contact"
+    ]
+
+
 def test_parse_judgment_accepts_fenced_json() -> None:
     raw = {
         "schema": "wellmanifest.webpage/llm-judgment/v1",

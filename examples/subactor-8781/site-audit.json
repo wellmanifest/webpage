@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -970,16 +970,217 @@
         "policy": [],
         "modularity": []
       }
+    },
+    {
+      "url": "http://127.0.0.1:8789/?action=contact",
+      "intentKind": "landing",
+      "httpStatus": 200,
+      "page": {
+        "schema": "wellmanifest.gui/page/v1",
+        "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
+        "id": "observed/-action=contact",
+        "version": "1.4.0",
+        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "placement": {
+          "home": "subactor",
+          "shape": "runtime_service",
+          "adopt": "wellmanifest/gui",
+          "runtimeOwner": "subactor"
+        },
+        "page": {
+          "kind": "landing",
+          "role": "public",
+          "source": "observed",
+          "url": "http://127.0.0.1:8789/?action=contact",
+          "family": "marketing"
+        },
+        "structure": {
+          "landmarks": {
+            "main": true,
+            "footer": true,
+            "h1": "Wybierz pakiet dla swojej organizacji",
+            "form": true,
+            "article": false,
+            "listing": false,
+            "headingOutline": [
+              {
+                "tag": "H1",
+                "text": "Wybierz pakiet dla swojej organizacji"
+              },
+              {
+                "tag": "H2",
+                "text": "Zapytanie o wdrożenie On-Premise"
+              },
+              {
+                "tag": "H2",
+                "text": "Dostępne integracje i connectory"
+              },
+              {
+                "tag": "H2",
+                "text": "Panel Operacyjny Subactor (Podgląd)"
+              },
+              {
+                "tag": "H3",
+                "text": "Dziennik Aktywności w Czasie Rzeczywistym"
+              },
+              {
+                "tag": "H2",
+                "text": "Pełny dostęp do Panelu Operacyjnego"
+              }
+            ]
+          },
+          "chrome": {
+            "itemSectionToolbar": false,
+            "itemViewSwitch": false,
+            "sectionAddButton": false,
+            "sectionViewToolbar": false,
+            "viewport": false,
+            "itemView": false,
+            "hamburger": false
+          }
+        },
+        "visual": {
+          "budgets": {
+            "fontFamilies": 3,
+            "colors": 16,
+            "fontSizes": 8
+          },
+          "counts": {
+            "fontFamilies": 1,
+            "colors": 10,
+            "fontSizes": 5
+          },
+          "tokens": {
+            "fontFamilies": [
+              {
+                "value": "Inter",
+                "count": 310
+              }
+            ],
+            "colors": [
+              {
+                "value": "rgb(244, 248, 251)",
+                "count": 318
+              },
+              {
+                "value": "rgb(175, 192, 206)",
+                "count": 167
+              },
+              {
+                "value": "rgb(183, 247, 92)",
+                "count": 66
+              },
+              {
+                "value": "rgb(34, 211, 197)",
+                "count": 37
+              },
+              {
+                "value": "rgba(202, 214, 224, 0.18)",
+                "count": 27
+              },
+              {
+                "value": "rgba(16, 38, 63, 0.82)",
+                "count": 17
+              },
+              {
+                "value": "rgb(7, 17, 31)",
+                "count": 15
+              },
+              {
+                "value": "rgba(13, 27, 42, 0.92)",
+                "count": 6
+              },
+              {
+                "value": "rgba(183, 247, 92, 0.15)",
+                "count": 4
+              },
+              {
+                "value": "rgba(34, 211, 197, 0.15)",
+                "count": 1
+              }
+            ],
+            "fontSizes": [
+              {
+                "value": "14.875px",
+                "count": 156
+              },
+              {
+                "value": "17px",
+                "count": 123
+              },
+              {
+                "value": "25.5px",
+                "count": 16
+              },
+              {
+                "value": "19.125px",
+                "count": 11
+              },
+              {
+                "value": "38.25px",
+                "count": 4
+              }
+            ]
+          }
+        },
+        "appliesPrinciples": [
+          "site-footer",
+          "page-kind",
+          "visual-budget",
+          "heading-outline"
+        ],
+        "defects": []
+      },
+      "signals": {
+        "lang": "pl",
+        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "viewport": true,
+        "canonical": "http://127.0.0.1:8789/",
+        "linkCount": 10,
+        "footerLinks": [
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
+        ],
+        "navLinks": [
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
+        ],
+        "pageLinks": [
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
+        ],
+        "buttonCount": 9,
+        "formCount": 1
+      },
+      "lenses": {
+        "kind": [],
+        "visual": [],
+        "structure": [],
+        "navigation": [],
+        "a11y": [],
+        "seo": [],
+        "consistency": [],
+        "ux": [],
+        "policy": [],
+        "modularity": []
+      }
     }
   ],
   "findings": [
-    {
-      "code": "WEB-UX-001",
-      "severity": "error",
-      "lens": "ux",
-      "message": "Contact path /?action=contact has no form (advertised in nav/footer)",
-      "url": "/?action=contact"
-    },
     {
       "code": "WEB-LLM-001",
       "severity": "error",

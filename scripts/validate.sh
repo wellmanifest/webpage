@@ -13,7 +13,7 @@ root = Path(".")
 version = (root / "VERSION").read_text().strip()
 standard = json.loads((root / "standard/webpage.standard.v1.json").read_text())
 schema = json.loads((root / "schemas/webpage-site-audit.schema.json").read_text())
-assert version == "0.2.2"
+assert version == "0.2.3"
 assert standard["subllm"] == {"application": "platform", "function": "site-audit", "home": "subactor/subllm"}
 assert "requiredPublicPaths" not in standard
 audit_src = (root / "scripts/audit_site.py").read_text()
@@ -25,6 +25,7 @@ assert "WEB-SITEMAP-001" in audit_src
 assert "WEB-SEO-001" in audit_src
 assert "WEB-UX-001" in audit_src
 assert "observation_findings" in audit_src
+assert "advertised_contact_targets" in audit_src
 assert "mkdtemp" in audit_src
 assert "infer_kind" in (root / "scripts/audit_site.py").read_text() or "defects_for_page" in audit_src
 assert standard["placement"]["home"] == "wellmanifest"

@@ -23,7 +23,9 @@ not by a path table in this pack.
 ## Order of work
 
 1. Sitemap + robots (`WEB-SITEMAP-001`, `WEB-ROBOTS-001`).
-2. Kind / contact path (`WEB-UX-001`) — footer/nav advertises contact, no form.
+2. Kind / contact path (`WEB-UX-001`) — footer/nav advertises contact, and
+   the followed page still has no form. Sitemap may omit that URL; the
+   auditor still opens the advertised href.
 3. One shared footer (`WEB-NAV-001`).
 4. Visual budgets (`GUI-VIS-*`) — still not a second brand kit.
 5. Cross-page color/font/lang drift (`WEB-CONS-*`).

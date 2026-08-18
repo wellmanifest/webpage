@@ -228,6 +228,33 @@ def looks_like_contact_href(href: str) -> bool:
     return bool(CONTACT_HREF_RE.search(href or ""))
 
 
+def advertised_contact_targets(pages: list[dict[str, Any]], base: str) -> list[str]:
+    """Follow contact hrefs seen in nav/footer even when sitemap omitted them."""
+    seen = {same_origin_page(base, str(item.get("url") or "")) or str(item.get("url") or "") for item in pages}
+    extra: list[str] = []
+    for item in pages:
+        sig = item.get("signals") or {}
+        for href in list(sig.get("footerLinks") or []) + list(sig.get("navLinks") or []):
+            if not looks_like_contact_href(str(href)):
+                continue
+            absolute = same_origin_page(base, str(href))
+            if absolute and absolute not in seen and absolute not in extra:
+                extra.append(absolute)
+    return extra
+
+
+def match_contact_page(pages: list[dict[str, Any]], href: str) -> dict[str, Any] | None:
+    if not pages:
+        return None
+    base = str(pages[0].get("url") or "/")
+    target = same_origin_page(base, href) or urllib.parse.urljoin(base, href)
+    for item in pages:
+        observed = same_origin_page(base, str(item.get("url") or "")) or str(item.get("url") or "")
+        if observed == target:
+            return item
+    return None
+
+
 def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Deterministic lenses from observed signals. No product path table."""
     out: list[dict[str, Any]] = []
@@ -265,17 +292,7 @@ def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
         ))
 
     for href in sorted(contact_hrefs):
-        target = urllib.parse.urljoin(str(pages[0].get("url") or "/"), href) if pages else href
-        matched = next(
-            (
-                item
-                for item in pages
-                if urllib.parse.urldefrag(str(item.get("url") or ""))[0].rstrip("/")
-                == urllib.parse.urldefrag(target)[0].rstrip("/")
-                or href in str(item.get("url") or "")
-            ),
-            None,
-        )
+        matched = match_contact_page(pages, href)
         form_count = int((matched.get("signals") or {}).get("formCount") or 0) if matched else 0
         if matched is not None and form_count > 0:
             continue
@@ -508,6 +525,10 @@ def main() -> int:
     urls = seed if source == "sitemap" else discover_urls(base, first[0], max_pages=args.max_pages)
     rest = [url for url in urls if url != first[0]["url"]]
     pages = first + (probe_urls(rest, page_js, args.chrome) if rest else [])
+    extra = advertised_contact_targets(pages, base)
+    budget = max(0, args.max_pages - len(pages))
+    if extra and budget:
+        pages.extend(probe_urls(extra[:budget], page_js, args.chrome))
 
     site = {
         "baseUrl": base,

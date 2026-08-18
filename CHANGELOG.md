@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.3] - 2026-08-18
+### Fixed
+- Follow contact hrefs advertised in nav/footer even when sitemap omitted them.
+  `WEB-UX-001` only fires after that page is observed and still has no form.
+
 ## [0.2.2] - 2026-08-18
 ### Added
 - Deterministic `WEB-SEO-001` (canonical), `WEB-UX-001` (contact without a form),
