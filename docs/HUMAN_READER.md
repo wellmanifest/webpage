@@ -31,7 +31,8 @@ tickets. This pack does not hardcode product paths.
    another page's H1. Sitemap may omit that URL; the auditor still opens
    the advertised href.
 3. One shared footer (`WEB-NAV-001`) and one shared header nav (`WEB-NAV-002`).
-   Header signals do not include footer `<nav>` links.
+   Header signals do not include footer `<nav>` links. A long `article`
+   (eight or more H2s) without in-page anchors is `WEB-NAV-003`.
 4. Visual budgets (`GUI-VIS-*`) — still not a second brand kit.
 5. Cross-page color/font/lang drift (`WEB-CONS-*`).
 6. Missing `rel=canonical` (`WEB-SEO-001`).

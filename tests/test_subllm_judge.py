@@ -232,6 +232,35 @@ def test_observation_findings_skip_contact_when_form_observed() -> None:
     ]
 
 
+def test_observation_findings_flag_long_article_without_toc() -> None:
+    from audit_site import observation_findings
+
+    outline = [{"tag": "H1", "text": "Legal"}] + [{"tag": "H2", "text": f"S{i}"} for i in range(8)]
+    pages = [
+        {
+            "url": "http://127.0.0.1:8789/legal",
+            "page": {
+                "page": {"kind": "article", "family": "content"},
+                "structure": {"landmarks": {"headingOutline": outline}},
+            },
+            "signals": {
+                "lang": "pl",
+                "canonical": "http://127.0.0.1:8789/legal",
+                "viewport": True,
+                "pageLinks": ["/", "/legal"],
+                "fragmentLinks": [],
+            },
+            "lenses": {},
+        }
+    ]
+    codes = {row["code"] for row in observation_findings(pages)}
+    assert "WEB-NAV-003" in codes
+    pages[0]["signals"]["pageLinks"] = [f"#s{i}" for i in range(4)]
+    pages[0]["lenses"] = {}
+    codes = {row["code"] for row in observation_findings(pages)}
+    assert "WEB-NAV-003" not in codes
+
+
 def test_observation_findings_flag_footer_and_family_drift() -> None:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
     from audit_site import observation_findings

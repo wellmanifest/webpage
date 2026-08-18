@@ -62,6 +62,7 @@ LENS_JS = r"""
       .filter((a) => !a.closest("footer, .footer"))
       .map((a) => a.getAttribute("href") || ""),
     pageLinks: hrefs,
+    fragmentLinks: hrefs.filter((h) => h.includes("#") && h.split("#")[1]),
     buttonCount: document.querySelectorAll("button, [role=button], input[type=submit]").length,
     formCount: document.querySelectorAll("form").length,
   };
@@ -286,6 +287,29 @@ def _page_family(item: dict[str, Any]) -> str:
     return str(((item.get("page") or {}).get("page") or {}).get("family") or "")
 
 
+def _page_kind(item: dict[str, Any]) -> str:
+    return str(((item.get("page") or {}).get("page") or {}).get("kind") or item.get("intentKind") or "")
+
+
+def _h2_count(item: dict[str, Any]) -> int:
+    outline = (((item.get("page") or {}).get("structure") or {}).get("landmarks") or {}).get("headingOutline") or []
+    return sum(1 for row in outline if isinstance(row, dict) and str(row.get("tag") or "").upper() == "H2")
+
+
+def _fragment_link_count(item: dict[str, Any]) -> int:
+    sig = item.get("signals") or {}
+    hrefs = list(sig.get("fragmentLinks") or []) + list(sig.get("pageLinks") or [])
+    seen: set[str] = set()
+    for href in hrefs:
+        text = str(href or "")
+        if "#" not in text:
+            continue
+        frag = text.rsplit("#", 1)[-1].strip()
+        if frag:
+            seen.add(frag)
+    return len(seen)
+
+
 def _token_values(item: dict[str, Any], key: str) -> set[str]:
     rows = (((item.get("page") or {}).get("visual") or {}).get("tokens") or {}).get(key) or []
     values: set[str] = set()
@@ -391,6 +415,24 @@ def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "navigation",
                 "Header nav link sets differ across pages",
             ))
+        for item in pages:
+            if _page_kind(item) != "article":
+                continue
+            h2s = _h2_count(item)
+            if h2s < 8:
+                continue
+            if _fragment_link_count(item) >= 4:
+                continue
+            url = str(item.get("url") or "")
+            row = finding(
+                "WEB-NAV-003",
+                "warn",
+                "navigation",
+                f"article has {h2s} H2 sections without in-page anchors or a table of contents",
+                url,
+            )
+            out.append(row)
+            item.setdefault("lenses", {}).setdefault("navigation", []).append(row)
 
         by_family: dict[str, list[dict[str, Any]]] = {}
         for item in pages:
@@ -478,6 +520,11 @@ def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]
     any_heading_dup = any(_h1_repeats_as_h2(item) for item in pages)
     colors_ok = all(_count_within_budget(item, "colors") for item in pages) if pages else True
     sizes_ok = all(_count_within_budget(item, "fontSizes") for item in pages) if pages else True
+    long_articles_have_toc = all(
+        _fragment_link_count(item) >= 4
+        for item in pages
+        if _page_kind(item) == "article" and _h2_count(item) >= 8
+    ) if any(_page_kind(item) == "article" and _h2_count(item) >= 8 for item in pages) else False
 
     kept: list[str] = []
     for raw in hints:
@@ -515,6 +562,12 @@ def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]
             "gui-vis-002" in folded
             or re.search(r"font-size count \d+ exceeds budget", folded)
             or "consolidate 5 font sizes" in folded
+        ):
+            continue
+        if long_articles_have_toc and (
+            "ux-nav-001" in folded
+            or "table of contents" in folded
+            or "in-page navigation" in folded
         ):
             continue
         if text not in kept:

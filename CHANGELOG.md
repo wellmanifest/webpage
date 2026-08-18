@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.12] - 2026-08-19
+### Added
+- Deterministic `WEB-NAV-003`: an `article` with eight or more H2s and
+  fewer than four in-page fragment links. Official stand-in for leftover
+  legal TOC hints; not a new product path table.
+
 ## [0.2.11] - 2026-08-19
 ### Fixed
 - Drop LLM hints that contradict measured titles, H1/H2 text, or
