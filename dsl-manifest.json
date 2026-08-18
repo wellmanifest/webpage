@@ -1,0 +1,21 @@
+{
+  "id": "wellmanifest/webpage",
+  "version": "0.2.0",
+  "title": "Whole-site webpage DSL",
+  "status": "canonical",
+  "standardOwner": "wellmanifest",
+  "placement": {
+    "home": "wellmanifest",
+    "shape": "domain_pack",
+    "adopt": "wellmanifest/webpage"
+  },
+  "adopt": [
+    "wellmanifest/gui",
+    "wellmanifest/poa",
+    "wellmanifest/policy-dsl",
+    "wellmanifest/modularity",
+    "wellmanifest/logs",
+    "wellmanifest/brand",
+    "subactor/subllm"
+  ]
+}

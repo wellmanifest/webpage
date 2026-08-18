@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
+  "title": "Wellmanifest webpage site audit v1",
+  "description": "Sitemap-driven multi-lens site report. Evidence only; not a brand SSOT and not an execution grant.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "version", "site", "pages", "findings"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema": { "const": "wellmanifest.webpage/site-audit/v1" },
+    "id": { "type": "string", "minLength": 3, "maxLength": 128 },
+    "version": { "type": "string" },
+    "title": { "type": "string" },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["home", "shape", "adopt"],
+      "properties": {
+        "home": { "enum": ["wellmanifest", "subactor", "semcod"] },
+        "shape": { "enum": ["domain_pack", "runtime_service", "both"] },
+        "adopt": { "const": "wellmanifest/webpage" },
+        "runtimeOwner": { "type": "string" }
+      }
+    },
+    "adopt": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "subllm": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "application": { "type": "string" },
+        "function": { "type": "string" },
+        "provider": { "type": "string" },
+        "model": { "type": "string" }
+      }
+    },
+    "poa": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "processRef": { "type": "string" },
+        "effect": { "const": "read_data" }
+      }
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseUrl"],
+      "properties": {
+        "baseUrl": { "type": "string" },
+        "sitemapUrl": { "type": "string" },
+        "sitemapStatus": { "type": "integer" },
+        "robotsStatus": { "type": "integer" },
+        "source": { "enum": ["sitemap", "fallback-required-paths"] }
+      }
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "page"],
+        "properties": {
+          "url": { "type": "string" },
+          "intentKind": { "type": "string" },
+          "httpStatus": { "type": "integer" },
+          "page": { "type": "object" },
+          "signals": { "type": "object" },
+          "lenses": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/finding" }
+            }
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    },
+    "hints": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 400 }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "lens", "message"],
+      "properties": {
+        "code": { "type": "string" },
+        "severity": { "enum": ["info", "warn", "error"] },
+        "lens": { "type": "string" },
+        "message": { "type": "string", "maxLength": 400 },
+        "url": { "type": "string" }
+      }
+    }
+  }
+}

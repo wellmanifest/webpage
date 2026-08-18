@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wellmanifest.com/schemas/webpage/llm-judgment/v1",
+  "title": "LLM judgment overlay for a webpage site audit",
+  "description": "Closed JSON the SubLLM platform/site-audit route must return. Observation tokens stay in the probe; this document only judges.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "pages", "siteFindings", "hints"],
+  "properties": {
+    "schema": { "const": "wellmanifest.webpage/llm-judgment/v1" },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "kind", "intentKind", "budgets", "findings"],
+        "properties": {
+          "url": { "type": "string" },
+          "kind": {
+            "enum": ["landing", "marketplace", "article", "form", "auth", "panel", "unknown"]
+          },
+          "intentKind": {
+            "enum": ["landing", "marketplace", "article", "form", "auth", "panel", "unknown"]
+          },
+          "family": {
+            "enum": ["marketing", "commerce", "workspace", "content", "account"]
+          },
+          "budgets": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fontFamilies", "colors", "fontSizes"],
+            "properties": {
+              "fontFamilies": { "type": "integer", "minimum": 1, "maximum": 16 },
+              "colors": { "type": "integer", "minimum": 1, "maximum": 64 },
+              "fontSizes": { "type": "integer", "minimum": 1, "maximum": 32 }
+            }
+          },
+          "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+          "summary": { "type": "string", "maxLength": 400 }
+        }
+      }
+    },
+    "siteFindings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "hints": { "type": "array", "items": { "type": "string", "maxLength": 400 } },
+    "proposedSitemapPaths": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 240 }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "lens", "message"],
+      "properties": {
+        "code": { "type": "string" },
+        "severity": { "enum": ["info", "warn", "error"] },
+        "lens": { "type": "string" },
+        "message": { "type": "string", "maxLength": 400 },
+        "url": { "type": "string" }
+      }
+    }
+  }
+}

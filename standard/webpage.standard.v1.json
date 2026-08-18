@@ -1,0 +1,111 @@
+{
+  "schema": "wellmanifest.webpage/standard/v1",
+  "$id": "https://wellmanifest.com/schemas/webpage/standard/v1",
+  "id": "wellmanifest/webpage",
+  "version": 1,
+  "status": "canonical",
+  "updated": "2026-08-18",
+  "title": "Whole-site webpage standardization",
+  "standardOwner": "wellmanifest",
+  "placement": {
+    "home": "wellmanifest",
+    "shape": "domain_pack",
+    "adopt": "wellmanifest/webpage"
+  },
+  "authority": "propose-only",
+  "adopt": [
+    "wellmanifest/gui",
+    "wellmanifest/poa",
+    "wellmanifest/policy-dsl",
+    "wellmanifest/modularity",
+    "wellmanifest/logs",
+    "wellmanifest/brand"
+  ],
+  "subllm": {
+    "application": "platform",
+    "function": "site-audit",
+    "home": "subactor/subllm"
+  },
+  "observation": {
+    "maxPages": 12,
+    "skipPathPrefixes": ["/api/", "/assets/", "/healthz", "/readyz", "/install/", "/favicon"]
+  },
+  "lenses": [
+    {
+      "id": "kind",
+      "name": "Page kind vs intent",
+      "independentOfType": true,
+      "adopt": "wellmanifest/gui",
+      "codes": ["GUI-PAGE-KIND-001", "GUI-PAGE-CHROME-001"]
+    },
+    {
+      "id": "visual",
+      "name": "Font / color / type budgets",
+      "independentOfType": true,
+      "adopt": "wellmanifest/gui",
+      "codes": ["GUI-VIS-FONT-001", "GUI-VIS-COLOR-001", "GUI-VIS-TYPE-001"]
+    },
+    {
+      "id": "structure",
+      "name": "Landmarks",
+      "independentOfType": true,
+      "adopt": "wellmanifest/gui",
+      "codes": ["GUI-VIS-STRUCT-002", "GUI-VIS-STRUCT-003", "GUI-VIS-STRUCT-004"]
+    },
+    {
+      "id": "navigation",
+      "name": "Shared nav and footer",
+      "independentOfType": true,
+      "codes": ["WEB-NAV-001", "WEB-NAV-002"]
+    },
+    {
+      "id": "a11y",
+      "name": "Language, viewport, outline",
+      "independentOfType": true,
+      "codes": ["WEB-A11Y-001", "WEB-A11Y-002"]
+    },
+    {
+      "id": "seo",
+      "name": "Title, sitemap, robots",
+      "independentOfType": true,
+      "codes": ["WEB-SEO-001", "WEB-SITEMAP-001", "WEB-ROBOTS-001"]
+    },
+    {
+      "id": "consistency",
+      "name": "Cross-page token and chrome drift",
+      "independentOfType": true,
+      "adopt": "wellmanifest/gui",
+      "codes": ["WEB-CONS-001", "WEB-CONS-002", "WEB-CONS-003"]
+    },
+    {
+      "id": "ux",
+      "name": "Usable path to contact and next action",
+      "independentOfType": true,
+      "codes": ["WEB-UX-001", "WEB-UX-002"]
+    },
+    {
+      "id": "policy",
+      "name": "No secrets in URL; propose-only reports",
+      "independentOfType": true,
+      "adopt": "wellmanifest/policy-dsl",
+      "codes": ["WEB-POLICY-001"]
+    },
+    {
+      "id": "modularity",
+      "name": "No second brand or offer SSOT",
+      "independentOfType": true,
+      "adopt": "wellmanifest/modularity",
+      "codes": ["WEB-MOD-001"]
+    }
+  ],
+  "urlDiscovery": "sitemap.xml when present, otherwise same-origin links collected from the homepage. Product paths are not hardcoded.",
+  "poa": {
+    "processRef": "poa://wellmanifest.webpage/process/site-audit/v1",
+    "effect": "read_data",
+    "note": "Inspect and report only. Never an execution grant."
+  },
+  "logs": {
+    "eventTypes": ["validation_started", "validation_passed", "validation_failed"],
+    "projection": "canonical-jsonl"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "poa.process/v1",
+  "id": "webpage.site-audit",
+  "processRef": "poa://wellmanifest.webpage/process/site-audit/v1",
+  "effect": "read_data",
+  "title": "Inspect a public site into webpage/site-audit/v1",
+  "note": "Observation only. Compiling this document does not grant apply or merge.",
+  "inputs": ["sitemap.xml or fallback requiredPublicPaths"],
+  "outputs": ["wellmanifest.webpage/site-audit/v1", "REPORT.md", "LLM_PROMPT.md", "logs JSONL"]
+}

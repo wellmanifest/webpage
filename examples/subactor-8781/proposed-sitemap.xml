@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>http://127.0.0.1:8781/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>http://127.0.0.1:8781/compare</loc><changefreq>weekly</changefreq></url>
+  <url><loc>http://127.0.0.1:8781/legal</loc><changefreq>weekly</changefreq></url>
+  <url><loc>http://127.0.0.1:8781/marketplace</loc><changefreq>weekly</changefreq></url>
+  <url><loc>http://127.0.0.1:8781/registry</loc><changefreq>weekly</changefreq></url>
+</urlset>

@@ -1,0 +1,34 @@
+# How a human reads the webpage DSL
+
+The site audit is JSON, but you do not need to read it as a programmer.
+
+## Three columns
+
+| Field | Meaning |
+| --- | --- |
+| `page.kind` | What the page **is** (landing, marketplace, article, form, auth, panel) |
+| `intentKind` | What the URL **promised** |
+| `defects[].code` | What is broken, same code on every page type |
+
+If `intentKind` ≠ `kind`, stop. Do not argue about fonts. The user opened the
+wrong surface. Kind and intent are assigned by SubLLM (`platform/site-audit`),
+not by a path table in this pack.
+
+## Severity
+
+- **error** — user cannot finish the job, or crawlers have no index.
+- **warn** — site is usable but inconsistent or hard to scan.
+- **info** — align later; do not treat as a product outage.
+
+## Order of work
+
+1. Sitemap + robots (`WEB-SITEMAP-001`, `WEB-ROBOTS-001`).
+2. Kind / contact path (`WEB-UX-001`).
+3. One shared footer (`WEB-NAV-001`).
+4. Visual budgets (`GUI-VIS-*`) — still not a second brand kit.
+5. Cross-page color/font drift (`WEB-CONS-*`).
+
+## Generated report
+
+`REPORT.md` is the same DSL flattened into Polish sentences. If the markdown
+and the JSON disagree, the JSON is the source.

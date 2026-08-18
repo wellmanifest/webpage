@@ -1,0 +1,28 @@
+{
+  "schema": "wellmanifest.webpage/llm-judgment/v1",
+  "pages": [
+    {
+      "url": "http://127.0.0.1:8781/",
+      "kind": "landing",
+      "intentKind": "landing",
+      "family": "marketing",
+      "budgets": { "fontFamilies": 3, "colors": 16, "fontSizes": 8 },
+      "findings": [],
+      "summary": "Public marketing homepage."
+    }
+  ],
+  "siteFindings": [
+    {
+      "code": "WEB-SITEMAP-001",
+      "severity": "error",
+      "lens": "seo",
+      "message": "sitemap.xml is missing",
+      "url": "http://127.0.0.1:8781/sitemap.xml"
+    }
+  ],
+  "hints": [
+    "Dodaj /sitemap.xml z publicznymi ścieżkami zebranymi z nawigacji, nie z allowlisty w kodzie.",
+    "Kind i budżety ustala model (subllm platform/site-audit), nie tabela ścieżek."
+  ],
+  "proposedSitemapPaths": ["/", "/compare", "/marketplace", "/legal", "/registry"]
+}
