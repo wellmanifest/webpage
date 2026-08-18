@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -982,14 +982,14 @@
           "landmarks": {
             "main": true,
             "footer": true,
-            "h1": "Wybierz pakiet dla swojej organizacji",
+            "h1": "Zapytanie o wdrożenie On-Premise",
             "form": true,
             "article": false,
             "listing": true,
             "headingOutline": [
               {
                 "tag": "H1",
-                "text": "Wybierz pakiet dla swojej organizacji"
+                "text": "Zapytanie o wdrożenie On-Premise"
               },
               {
                 "tag": "H2",

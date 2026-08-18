@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.8] - 2026-08-18
+### Added
+- Deterministic `WEB-UX-002`: a `form` page that reuses another page's H1.
+
 ## [0.2.7] - 2026-08-18
 ### Added
 - Structure lens lists `GUI-VIS-STRUCT-005` (article kind without `<article>`).

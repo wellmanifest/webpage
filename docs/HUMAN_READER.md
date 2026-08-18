@@ -24,9 +24,10 @@ This pack does not hardcode product paths.
 ## Order of work
 
 1. Sitemap + robots (`WEB-SITEMAP-001`, `WEB-ROBOTS-001`).
-2. Kind / contact path (`WEB-UX-001`) — footer/nav advertises contact, and
-   the followed page still has no form. Sitemap may omit that URL; the
-   auditor still opens the advertised href.
+2. Kind / contact path (`WEB-UX-001`, `WEB-UX-002`) — footer/nav advertises
+   contact, and the followed page still has no form, or a form page reuses
+   another page's H1. Sitemap may omit that URL; the auditor still opens
+   the advertised href.
 3. One shared footer (`WEB-NAV-001`) and one shared header nav (`WEB-NAV-002`).
    Header signals do not include footer `<nav>` links.
 4. Visual budgets (`GUI-VIS-*`) — still not a second brand kit.

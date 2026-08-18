@@ -128,6 +128,51 @@ def test_observation_findings_flag_canonical_contact_and_lang() -> None:
     assert pages[0]["lenses"]["seo"][0]["code"] == "WEB-SEO-001"
 
 
+def test_observation_findings_flag_form_reusing_other_h1() -> None:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from audit_site import observation_findings
+
+    pages = [
+        {
+            "url": "http://127.0.0.1:8789/",
+            "intentKind": "landing",
+            "page": {
+                "page": {"kind": "landing"},
+                "structure": {"landmarks": {"h1": "Wybierz pakiet"}},
+            },
+            "signals": {
+                "lang": "pl",
+                "canonical": "http://127.0.0.1:8789/",
+                "viewport": True,
+                "formCount": 0,
+                "footerLinks": ["/?action=contact"],
+                "navLinks": ["/?action=contact"],
+            },
+            "lenses": {},
+        },
+        {
+            "url": "http://127.0.0.1:8789/?action=contact",
+            "intentKind": "form",
+            "page": {
+                "page": {"kind": "form"},
+                "structure": {"landmarks": {"h1": "Wybierz pakiet"}},
+            },
+            "signals": {
+                "lang": "pl",
+                "canonical": "http://127.0.0.1:8789/",
+                "viewport": True,
+                "formCount": 1,
+                "footerLinks": ["/?action=contact"],
+                "navLinks": [],
+            },
+            "lenses": {},
+        },
+    ]
+    codes = {row["code"] for row in observation_findings(pages)}
+    assert "WEB-UX-001" not in codes
+    assert "WEB-UX-002" in codes
+
+
 def test_observation_findings_skip_contact_when_form_observed() -> None:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
     from audit_site import advertised_contact_targets, observation_findings

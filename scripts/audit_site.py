@@ -348,6 +348,30 @@ def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if matched is not None:
             matched.setdefault("lenses", {}).setdefault("ux", []).append(row)
 
+    h1_kinds: dict[str, set[str]] = {}
+    for item in pages:
+        h1 = str((((item.get("page") or {}).get("structure") or {}).get("landmarks") or {}).get("h1") or "").strip()
+        kind = str(((item.get("page") or {}).get("page") or {}).get("kind") or item.get("intentKind") or "")
+        if h1 and kind:
+            h1_kinds.setdefault(h1, set()).add(kind)
+    for item in pages:
+        kind = str(((item.get("page") or {}).get("page") or {}).get("kind") or item.get("intentKind") or "")
+        if kind != "form":
+            continue
+        h1 = str((((item.get("page") or {}).get("structure") or {}).get("landmarks") or {}).get("h1") or "").strip()
+        others = (h1_kinds.get(h1) or set()) - {"form"}
+        if h1 and others:
+            url = str(item.get("url") or "")
+            row = finding(
+                "WEB-UX-002",
+                "warn",
+                "ux",
+                "form page reuses H1 from " + ", ".join(sorted(others)) + f": {h1}",
+                url,
+            )
+            out.append(row)
+            item.setdefault("lenses", {}).setdefault("ux", []).append(row)
+
     if pages:
         base = str(pages[0].get("url") or "/")
         footer_sets = {_footer_keyset(item, base) for item in pages if _footer_keyset(item, base)}
