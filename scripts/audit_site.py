@@ -38,6 +38,7 @@ sys.path.insert(0, str(GUI_SCRIPTS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gui_page import build_page, defects_for_page  # noqa: E402
 from subllm_judge import complete as subllm_complete  # noqa: E402
+from subllm_judge import parse_judgment_file  # noqa: E402
 
 STANDARD = json.loads((PACK_ROOT / "standard/webpage.standard.v1.json").read_text())
 PACK_VERSION = (PACK_ROOT / "VERSION").read_text().strip()
@@ -427,14 +428,17 @@ def apply_judgment(pages: list[dict[str, Any]], judgment: dict[str, Any]) -> Non
         item = by_url.get(judged.get("url") or "")
         if item is None:
             continue
-        item["intentKind"] = judged.get("intentKind") or "unknown"
         meta = item["page"].setdefault("page", {})
-        meta["kind"] = judged.get("kind") or "unknown"
+        kind = judged.get("kind") or ""
+        intent = judged.get("intentKind") or ""
+        if kind and kind != "unknown":
+            meta["kind"] = kind
+        if intent and intent != "unknown":
+            item["intentKind"] = intent
+            meta["intentKind"] = intent
         if judged.get("family"):
             meta["family"] = judged["family"]
-        meta["intentKind"] = item["intentKind"]
-        if judged.get("budgets"):
-            item["page"]["visual"]["budgets"] = judged["budgets"]
+        # Measured gui budgets stay; LLM tighter counts become hints, not a second SSOT.
         buckets = item["lenses"]
         for defect in judged.get("findings") or []:
             lens = defect.get("lens") or "ux"
@@ -447,12 +451,19 @@ def judgment_prompt(site: dict[str, Any], pages: list[dict[str, Any]]) -> str:
         "rules": [
             "Do not invent brand tokens. Colors/fonts HOME is wellmanifest/brand.",
             "Do not hardcode product paths; use only URLs present in observation.",
-            "Assign page.kind and intentKind from URL+DOM+headings, not from a built-in map.",
-            "Choose visual budgets per kind after seeing counts. Emit GUI-VIS-* only when counts exceed your budget.",
+            "pages[].kind and intentKind must be landing|marketplace|article|form|auth|panel|unknown.",
+            "Do not invent finding codes. Use only the lens codes listed in this prompt.",
+            "Finding shape: {code, severity: info|warn|error, lens, message}. Use siteFindings and hints, not findings/poaHints.",
+            "Keep wellmanifest/gui visual budgets. Do not invent a tighter palette threshold.",
             "Emit WEB-SITEMAP-001 / WEB-ROBOTS-001 only when site.sitemapStatus/robotsStatus is not 200.",
             "POA effect is read_data. Propose hints, do not apply.",
         ],
         "lenses": [lens["id"] for lens in STANDARD["lenses"]],
+        "codes": sorted({
+            str(code)
+            for lens in STANDARD["lenses"]
+            for code in (lens.get("codes") or [])
+        }),
         "site": site,
         "pages": [
             {
@@ -486,7 +497,7 @@ def human_report(audit: dict[str, Any]) -> str:
         "(`infer_kind` + `page_profiles`). LLM (`subllm "
         f"{route.get('application', 'platform')}/{route.get('function', 'site-audit')}`"
         f", {route.get('provider') or 'optional'} / {route.get('model') or '—'}) "
-        "może nadpisać kind/budżety i dodać wskazówki.",
+        "dodaje wskazówki; kind nadpisuje tylko przy poprawnym enum.",
         "Soczewki są niezależne od typu strony. Najpierw kind, potem landmarks, potem budżety.",
         "",
         f"Źródło URL-i: **{audit['site']['source']}**. sitemap={audit['site']['sitemapStatus']} robots={audit['site']['robotsStatus']}.",
@@ -669,9 +680,13 @@ def main() -> int:
     hints: list[str] = []
     judgment: dict[str, Any] = {}
     if args.judgment:
-        judgment = json.loads(Path(args.judgment).read_text())
-        subllm_meta["provider"] = "fixture"
-        subllm_meta["model"] = Path(args.judgment).name
+        judgment, file_meta = parse_judgment_file(Path(args.judgment))
+        for key in ("application", "function", "provider", "model"):
+            if file_meta.get(key):
+                subllm_meta[key] = file_meta[key]
+        if not subllm_meta.get("provider"):
+            subllm_meta["provider"] = "fixture"
+            subllm_meta["model"] = Path(args.judgment).name
     elif not args.skip_llm:
         try:
             judgment, subllm_meta = subllm_complete(judgment_prompt(site, pages))

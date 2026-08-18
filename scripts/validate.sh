@@ -13,7 +13,7 @@ root = Path(".")
 version = (root / "VERSION").read_text().strip()
 standard = json.loads((root / "standard/webpage.standard.v1.json").read_text())
 schema = json.loads((root / "schemas/webpage-site-audit.schema.json").read_text())
-assert version == "0.2.9"
+assert version == "0.2.10"
 assert standard["subllm"] == {"application": "platform", "function": "site-audit", "home": "subactor/subllm"}
 assert "requiredPublicPaths" not in standard
 audit_src = (root / "scripts/audit_site.py").read_text()
@@ -34,7 +34,11 @@ assert "WEB-NAV-002" in audit_src
 assert "closest(\"footer, .footer\")" in audit_src or "closest('footer, .footer')" in audit_src
 assert "WEB-CONS-001" in audit_src
 assert "WEB-CONS-002" in audit_src
-assert "/home/tom/" not in (root / "scripts/subllm_judge.py").read_text()
+judge_src = (root / "scripts/subllm_judge.py").read_text()
+assert "/home/tom/" not in judge_src
+assert "normalize_judgment" in judge_src
+assert "parse_judgment_file" in judge_src
+assert "poaHints" in judge_src
 assert "infer_kind" in (root / "scripts/audit_site.py").read_text() or "defects_for_page" in audit_src
 assert standard["placement"]["home"] == "wellmanifest"
 assert standard["placement"]["shape"] == "domain_pack"

@@ -1,0 +1,522 @@
+{
+  "meta": {
+    "application": "platform",
+    "function": "site-audit",
+    "provider": "openrouter",
+    "model": "glm-5.2"
+  },
+  "judgment": {
+    "schema": "wellmanifest.webpage/llm-judgment/v1",
+    "site": {
+      "baseUrl": "http://127.0.0.1:8789/",
+      "source": "sitemap",
+      "sitemapStatus": 200,
+      "robotsStatus": 200,
+      "lang": "pl",
+      "brand": {
+        "fontFamilies": [
+          {
+            "token": "font-family-base",
+            "value": "Inter",
+            "source": "HOME"
+          }
+        ],
+        "colors": [
+          {
+            "token": "color-surface",
+            "value": "rgb(244, 248, 251)",
+            "source": "HOME"
+          },
+          {
+            "token": "color-muted",
+            "value": "rgb(175, 192, 206)",
+            "source": "HOME"
+          },
+          {
+            "token": "color-accent-primary",
+            "value": "rgb(183, 247, 92)",
+            "source": "HOME"
+          },
+          {
+            "token": "color-accent-secondary",
+            "value": "rgb(34, 211, 197)",
+            "source": "HOME"
+          },
+          {
+            "token": "color-dark-surface",
+            "value": "rgb(7, 17, 31)",
+            "source": "HOME"
+          },
+          {
+            "token": "color-dark-text",
+            "value": "rgba(16, 38, 63, 0.82)",
+            "source": "HOME"
+          }
+        ],
+        "typeScale": [
+          {
+            "token": "text-base",
+            "value": "17px"
+          },
+          {
+            "token": "text-small",
+            "value": "14.875px"
+          },
+          {
+            "token": "text-lg",
+            "value": "19.125px"
+          },
+          {
+            "token": "text-xl",
+            "value": "25.5px"
+          },
+          {
+            "token": "text-2xl",
+            "value": "38.25px"
+          }
+        ]
+      },
+      "navigation": {
+        "primaryLinks": [
+          "/",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
+        ],
+        "footerLinks": [
+          "/",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
+        ],
+        "consistentAcrossPages": true
+      }
+    },
+    "pages": [
+      {
+        "url": "http://127.0.0.1:8789/",
+        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "page": {
+          "kind": "landing.pricing",
+          "intentKind": "evaluate",
+          "rationale": "URL root + H1 'Wybierz pakiet dla swojej organizacji' + listing landmark + package/integration sections → pricing landing page for evaluation."
+        },
+        "visualBudget": {
+          "colors": 6,
+          "fontSizes": 4,
+          "fontFamilies": 1
+        },
+        "actualCounts": {
+          "colors": 10,
+          "fontSizes": 5,
+          "fontFamilies": 1
+        },
+        "lenses": {
+          "kind": "landing.pricing — package selection with integration list and operational panel preview",
+          "visual": "10 colors and 5 font sizes exceed budget; rgba variants of accent colors suggest inline opacity usage rather than tokenized variants",
+          "structure": "Single H1, logical H2/H3 hierarchy; main + footer landmarks present; listing landmark true",
+          "navigation": "6 nav links consistent with footer; no hamburger detected",
+          "a11y": "Heading outline is logical; viewport meta present; no form on this page",
+          "seo": "Title is brand-level generic; H1 is package-specific — title/H1 mismatch reduces keyword clarity",
+          "consistency": "Nav and footer links match across all pages; Inter font consistent",
+          "ux": "Pricing + integrations + panel preview on one page is information-dense but coherent for a landing",
+          "policy": "No form; B2B context implied by legal page linkage",
+          "modularity": "Page composes distinct sections (pricing, integrations, panel preview) — reasonable modular assembly"
+        },
+        "findings": [
+          {
+            "id": "GUI-VIS-001",
+            "lens": "visual",
+            "severity": "medium",
+            "message": "Color count 10 exceeds budget 6. Consolidate rgba opacity variants (e.g. rgba(183,247,92,0.15), rgba(34,211,197,0.15), rgba(202,214,224,0.18)) into tokenized surface/accent tokens with opacity modifiers."
+          },
+          {
+            "id": "GUI-VIS-002",
+            "lens": "visual",
+            "severity": "low",
+            "message": "Font-size count 5 exceeds budget 4. Consider merging 25.5px and 19.125px into a single intermediate step or mapping both to the same token."
+          },
+          {
+            "id": "SEO-TITLE-002",
+            "lens": "seo",
+            "severity": "low",
+            "message": "Page title 'Subactor — platforma autonomizacji procesów biznesowych' is brand-generic while H1 'Wybierz pakiet dla swojej organizacji' is package-specific. Align title to reflect pricing intent."
+          }
+        ]
+      },
+      {
+        "url": "http://127.0.0.1:8789/compare",
+        "title": "Subactor obok innych platform",
+        "page": {
+          "kind": "comparison",
+          "intentKind": "evaluate",
+          "rationale": "URL /compare + H1 'Subactor obok innych platform' + H2 'Zestawienie' + article+listing landmarks → comparison page for evaluating against alternatives."
+        },
+        "visualBudget": {
+          "colors": 5,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "actualCounts": {
+          "colors": 6,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "lenses": {
+          "kind": "comparison — feature matrix against other platforms",
+          "visual": "6 colors slightly exceeds budget 5; 3 font sizes within budget; Inter consistent",
+          "structure": "H1 + single H2; article + listing landmarks; clean outline",
+          "navigation": "Consistent nav/footer",
+          "a11y": "Logical heading order; viewport present",
+          "seo": "Title and H1 align well; concise and descriptive",
+          "consistency": "Font and color palette align with brand tokens",
+          "ux": "Comparison table is appropriate for evaluate intent",
+          "policy": "No transactional elements; informational",
+          "modularity": "Simple single-purpose page — good separation"
+        },
+        "findings": [
+          {
+            "id": "GUI-VIS-001",
+            "lens": "visual",
+            "severity": "low",
+            "message": "Color count 6 slightly exceeds budget 5. One rgba variant (rgba(202,214,224,0.18)) could be tokenized as a surface-overlay token."
+          }
+        ]
+      },
+      {
+        "url": "http://127.0.0.1:8789/registry",
+        "title": "Aktualne rejestry",
+        "page": {
+          "kind": "listing.registry",
+          "intentKind": "read",
+          "rationale": "URL /registry + H1 'Aktualne rejestry' + listing landmark + article landmark → registry listing page for reading current registries."
+        },
+        "visualBudget": {
+          "colors": 5,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "actualCounts": {
+          "colors": 5,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "lenses": {
+          "kind": "listing.registry — current registries display",
+          "visual": "5 colors and 3 font sizes within budget; Inter consistent",
+          "structure": "Single H1 only; listing + article landmarks; no subheadings detected — may benefit from section headings for long lists",
+          "navigation": "Consistent nav/footer",
+          "a11y": "Heading outline minimal (H1 only); viewport present; no form",
+          "seo": "Title and H1 align; short but adequate for a listing page",
+          "consistency": "Palette matches brand tokens",
+          "ux": "Registry listing is straightforward; high element count (371 font-family usages) suggests dense tabular data",
+          "policy": "Read-only data display; no transactional elements",
+          "modularity": "Single-purpose listing page — clean separation"
+        },
+        "findings": []
+      },
+      {
+        "url": "http://127.0.0.1:8789/marketplace",
+        "title": "Marketplace partnerów",
+        "page": {
+          "kind": "listing.marketplace",
+          "intentKind": "browse",
+          "rationale": "URL /marketplace + H1 'Marketplace partnerów' + listing + article landmarks → marketplace listing for browsing partner offerings."
+        },
+        "visualBudget": {
+          "colors": 5,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "actualCounts": {
+          "colors": 5,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "lenses": {
+          "kind": "listing.marketplace — partner directory",
+          "visual": "5 colors and 3 font sizes within budget; Inter consistent",
+          "structure": "Single H1 only; listing + article landmarks; no subheadings — may benefit from category headings",
+          "navigation": "Consistent nav/footer",
+          "a11y": "Minimal heading outline; viewport present",
+          "seo": "Title and H1 align; concise",
+          "consistency": "Palette matches brand tokens",
+          "ux": "Marketplace browsing intent; low element count (60 font-family usages) suggests few partners listed",
+          "policy": "No transactional elements on this page; informational browsing",
+          "modularity": "Single-purpose listing — clean"
+        },
+        "findings": []
+      },
+      {
+        "url": "http://127.0.0.1:8789/legal",
+        "title": "Informacje prawne i zgodność UE",
+        "page": {
+          "kind": "legal",
+          "intentKind": "read",
+          "rationale": "URL /legal + H1 'Informacje prawne i zgodność UE' + article landmark + 12 H2 sections covering GDPR, pricing, contracts, AI oversight → legal/compliance article page."
+        },
+        "visualBudget": {
+          "colors": 5,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "actualCounts": {
+          "colors": 6,
+          "fontSizes": 3,
+          "fontFamilies": 1
+        },
+        "lenses": {
+          "kind": "legal — compliance and terms article",
+          "visual": "6 colors slightly exceeds budget 5; 3 font sizes within budget; Inter consistent",
+          "structure": "Excellent heading hierarchy: H1 + 12 H2 sections covering distinct legal topics; article landmark present; no listing",
+          "navigation": "Consistent nav/footer; no in-page TOC detected despite 12 sections",
+          "a11y": "Strong heading outline; viewport present; no form; could benefit from skip-link or TOC for 12 sections",
+          "seo": "Title and H1 align well; descriptive",
+          "consistency": "Palette matches brand tokens; rgba(34,211,197,0.08) is a minor variant",
+          "ux": "Long legal page with clear section headings; lacks in-page navigation for 12 sections — users must scroll to find specific topics",
+          "policy": "Covers RODO/GDPR, B2B offer, VAT, contracts, AI oversight, digital accessibility, data export — comprehensive EU compliance posture",
+          "modularity": "Single article page with logical section decomposition — appropriate for legal content"
+        },
+        "findings": [
+          {
+            "id": "GUI-VIS-001",
+            "lens": "visual",
+            "severity": "low",
+            "message": "Color count 6 slightly exceeds budget 5. rgba(34,211,197,0.08) is a one-off variant — tokenize as accent-secondary-faint."
+          },
+          {
+            "id": "UX-NAV-001",
+            "lens": "ux",
+            "severity": "medium",
+            "message": "12 H2 sections with no in-page table of contents or anchor navigation. Add a sticky TOC or section anchors for findability in long legal content."
+          }
+        ]
+      },
+      {
+        "url": "http://127.0.0.1:8789/?action=contact",
+        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "page": {
+          "kind": "form.contact",
+          "intentKind": "transact",
+          "rationale": "URL ?action=contact + H1 'Zapytanie o wdrożenie On-Premise' + form landmark true + formCount=1 → contact/lead form for on-premise deployment inquiry."
+        },
+        "visualBudget": {
+          "colors": 6,
+          "fontSizes": 4,
+          "fontFamilies": 1
+        },
+        "actualCounts": {
+          "colors": 10,
+          "fontSizes": 5,
+          "fontFamilies": 1
+        },
+        "lenses": {
+          "kind": "form.contact — on-premise deployment inquiry form",
+          "visual": "10 colors and 5 font sizes exceed budget; identical palette to home page — suggests full home page rendered with form injected",
+          "structure": "Duplicate H1/H2 ('Zapytanie o wdrożenie On-Premise'); remaining headings (integrations, panel preview, full access) are copied from home page — form is not isolated",
+          "navigation": "Consistent nav/footer",
+          "a11y": "Duplicate heading text (H1 and H2 identical) violates heading distinction; form present but no associated fieldset/legend info available; viewport present",
+          "seo": "Title is identical to home page — not descriptive of contact intent; should be 'Kontakt — wdrożenie On-Premise | Subactor' or similar",
+          "consistency": "Visual tokens match home page exactly (same 10 colors, 5 font sizes) confirming shared template",
+          "ux": "User landing on contact sees entire home page content plus form — distracting; form should be primary focus",
+          "policy": "Form collects deployment inquiry data; legal page linked in nav for compliance context",
+          "modularity": "Poor separation — contact form is injected into home page template rather than being a standalone page; violates single-responsibility per page"
+        },
+        "findings": [
+          {
+            "id": "GUI-VIS-001",
+            "lens": "visual",
+            "severity": "medium",
+            "message": "Color count 10 exceeds budget 6. Same excess as home page — inherited from shared template. Consolidate rgba opacity variants into tokens."
+          },
+          {
+            "id": "GUI-VIS-002",
+            "lens": "visual",
+            "severity": "low",
+            "message": "Font-size count 5 exceeds budget 4. Inherited from home template."
+          },
+          {
+            "id": "A11Y-HEADING-001",
+            "lens": "a11y",
+            "severity": "medium",
+            "message": "H1 'Zapytanie o wdrożenie On-Premise' and H2 'Zapytanie o wdrożenie On-Premise' are identical. Remove the duplicate H2 or change it to a contextual subheading."
+          },
+          {
+            "id": "SEO-TITLE-001",
+            "lens": "seo",
+            "severity": "medium",
+            "message": "Page title 'Subactor — platforma autonomizacji procesów biznesowych' is identical to home page and does not reflect contact intent. Set a descriptive title like 'Kontakt — wdrożenie On-Premise | Subactor'."
+          },
+          {
+            "id": "UX-STRUCTURE-001",
+            "lens": "ux",
+            "severity": "high",
+            "message": "Contact page renders full home page content (integrations, panel preview, full access sections) alongside the form. The form is not the primary focus. Isolate the contact form on its own page template."
+          },
+          {
+            "id": "MODULARITY-001",
+            "lens": "modularity",
+            "severity": "high",
+            "message": "Contact form is injected into home page via ?action=contact query param rather than having a dedicated route/template. This couples form rendering to landing content and prevents independent maintenance."
+          }
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "id": "GUI-VIS-001",
+        "lens": "visual",
+        "severity": "medium",
+        "scope": "site",
+        "pages": [
+          "/",
+          "/?action=contact",
+          "/compare",
+          "/legal"
+        ],
+        "message": "Multiple pages exceed color budget due to rgba opacity variants of brand colors. Define opacity-modified tokens (e.g. accent-primary--faint, surface--overlay) instead of inline rgba values."
+      },
+      {
+        "id": "GUI-VIS-002",
+        "lens": "visual",
+        "severity": "low",
+        "scope": "site",
+        "pages": [
+          "/",
+          "/?action=contact"
+        ],
+        "message": "Home and contact pages use 5 font sizes vs budget 4. Consolidate 25.5px into either 19.125px or 38.25px step."
+      },
+      {
+        "id": "SEO-TITLE-001",
+        "lens": "seo",
+        "severity": "medium",
+        "scope": "page",
+        "pages": [
+          "/?action=contact"
+        ],
+        "message": "Contact page title is identical to home page. Each page should have a unique, intent-reflective title."
+      },
+      {
+        "id": "A11Y-HEADING-001",
+        "lens": "a11y",
+        "severity": "medium",
+        "scope": "page",
+        "pages": [
+          "/?action=contact"
+        ],
+        "message": "Duplicate H1/H2 heading text on contact page reduces heading distinctiveness for screen reader navigation."
+      },
+      {
+        "id": "UX-STRUCTURE-001",
+        "lens": "ux",
+        "severity": "high",
+        "scope": "page",
+        "pages": [
+          "/?action=contact"
+        ],
+        "message": "Contact form is embedded within full home page content, reducing form focus and creating cognitive overload."
+      },
+      {
+        "id": "MODULARITY-001",
+        "lens": "modularity",
+        "severity": "high",
+        "scope": "page",
+        "pages": [
+          "/?action=contact"
+        ],
+        "message": "Contact route uses query param ?action=contact on home URL instead of a dedicated /contact path. This couples form and landing templates."
+      },
+      {
+        "id": "UX-NAV-001",
+        "lens": "ux",
+        "severity": "medium",
+        "scope": "page",
+        "pages": [
+          "/legal"
+        ],
+        "message": "Legal page has 12 H2 sections with no in-page navigation. Add a table of contents or section anchors."
+      }
+    ],
+    "poaHints": [
+      {
+        "effect": "read_data",
+        "target": "site.brand.colors",
+        "hint": "Extract 6 core brand colors from HOME page and register as design tokens. Map rgba variants to opacity-modified token aliases.",
+        "pagesAffected": [
+          "/",
+          "/?action=contact",
+          "/compare",
+          "/legal"
+        ]
+      },
+      {
+        "effect": "read_data",
+        "target": "site.brand.typeScale",
+        "hint": "Consolidate 5 font sizes to 4 by merging 25.5px into nearest step. Register as type-scale tokens.",
+        "pagesAffected": [
+          "/",
+          "/?action=contact"
+        ]
+      },
+      {
+        "effect": "read_data",
+        "target": "pages[/?action=contact].title",
+        "hint": "Set contact page title to 'Kontakt — wdrożenie On-Premise | Subactor' to reflect form intent and differentiate from home.",
+        "pagesAffected": [
+          "/?action=contact"
+        ]
+      },
+      {
+        "effect": "read_data",
+        "target": "pages[/?action=contact].structure",
+        "hint": "Remove duplicate H2 matching H1 text. Isolate contact form from home page sections (integrations, panel preview, full access).",
+        "pagesAffected": [
+          "/?action=contact"
+        ]
+      },
+      {
+        "effect": "read_data",
+        "target": "pages[/legal].structure",
+        "hint": "Add in-page table of contents with anchor links to each of the 12 H2 sections for improved navigation.",
+        "pagesAffected": [
+          "/legal"
+        ]
+      }
+    ],
+    "summary": {
+      "totalPages": 6,
+      "totalFindings": 7,
+      "bySeverity": {
+        "high": 2,
+        "medium": 3,
+        "low": 2
+      },
+      "byLens": {
+        "visual": 2,
+        "seo": 1,
+        "a11y": 1,
+        "ux": 2,
+        "modularity": 1
+      },
+      "siteHealth": "fair",
+      "strengths": [
+        "Consistent navigation and footer across all 6 pages",
+        "Single font family (Inter) used consistently",
+        "Legal page has comprehensive EU compliance coverage with 12 well-structured sections",
+        "Registry and marketplace pages are within visual budgets",
+        "Sitemap and robots both return 200"
+      ],
+      "topConcerns": [
+        "Contact page is not modular — form injected into home template via query param",
+        "Home and contact pages exceed color and font-size budgets",
+        "Contact page has duplicate headings and generic title",
+        "Legal page lacks in-page navigation for 12 sections"
+      ]
+    }
+  }
+}

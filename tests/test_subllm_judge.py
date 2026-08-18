@@ -283,6 +283,100 @@ def test_observation_findings_flag_footer_and_family_drift() -> None:
     assert "WEB-CONS-002" in codes
 
 
+def test_parse_judgment_normalizes_live_wrapper() -> None:
+    raw = {
+        "meta": {"application": "platform", "function": "site-audit", "provider": "openrouter", "model": "glm-5.2"},
+        "judgment": {
+            "schema": "wellmanifest.webpage/llm-judgment/v1",
+            "pages": [
+                {
+                    "url": "http://127.0.0.1:8789/",
+                    "page": {"kind": "landing.pricing", "intentKind": "evaluate"},
+                    "visualBudget": {"colors": 6, "fontSizes": 4, "fontFamilies": 1},
+                    "findings": [
+                        {
+                            "id": "GUI-VIS-001",
+                            "lens": "visual",
+                            "severity": "medium",
+                            "message": "Color count 10 exceeds invented budget 6.",
+                        },
+                        {
+                            "id": "WEB-SEO-001",
+                            "lens": "seo",
+                            "severity": "low",
+                            "message": "Missing rel=canonical",
+                            "url": "http://127.0.0.1:8789/",
+                        },
+                    ],
+                }
+            ],
+            "findings": [
+                {
+                    "id": "UX-STRUCTURE-001",
+                    "lens": "ux",
+                    "severity": "high",
+                    "message": "Contact form is embedded in the landing template.",
+                }
+            ],
+            "poaHints": [
+                {"target": "pages[/?action=contact].structure", "hint": "Isolate the contact form."}
+            ],
+        },
+    }
+    parsed = parse_judgment(json.dumps(raw))
+    assert parsed["pages"][0]["kind"] == "landing"
+    assert parsed["pages"][0]["intentKind"] == "unknown"
+    assert parsed["pages"][0]["budgets"]["colors"] == 6
+    codes = {row["code"] for row in parsed["pages"][0]["findings"]}
+    assert codes == {"WEB-SEO-001"}
+    assert parsed["pages"][0]["findings"][0]["severity"] == "info"
+    assert parsed["siteFindings"] == []
+    assert any("GUI-VIS-001" in hint for hint in parsed["hints"])
+    assert any("UX-STRUCTURE-001" in hint for hint in parsed["hints"])
+    assert any("Isolate the contact form" in hint for hint in parsed["hints"])
+
+
+def test_apply_judgment_keeps_observed_kind_and_budgets() -> None:
+    from audit_site import apply_judgment
+
+    pages = [
+        {
+            "url": "http://127.0.0.1:8789/",
+            "intentKind": "landing",
+            "page": {
+                "page": {"kind": "landing", "family": "marketing"},
+                "visual": {"budgets": {"fontFamilies": 3, "colors": 16, "fontSizes": 8}},
+            },
+            "lenses": {"seo": [], "visual": []},
+        }
+    ]
+    apply_judgment(
+        pages,
+        {
+            "pages": [
+                {
+                    "url": "http://127.0.0.1:8789/",
+                    "kind": "landing",
+                    "intentKind": "unknown",
+                    "budgets": {"fontFamilies": 1, "colors": 6, "fontSizes": 4},
+                    "findings": [
+                        {
+                            "code": "WEB-SEO-001",
+                            "severity": "info",
+                            "lens": "seo",
+                            "message": "Missing rel=canonical",
+                        }
+                    ],
+                }
+            ]
+        },
+    )
+    assert pages[0]["intentKind"] == "landing"
+    assert pages[0]["page"]["page"]["kind"] == "landing"
+    assert pages[0]["page"]["visual"]["budgets"]["colors"] == 16
+    assert pages[0]["lenses"]["seo"][0]["code"] == "WEB-SEO-001"
+
+
 def test_parse_judgment_accepts_fenced_json() -> None:
     raw = {
         "schema": "wellmanifest.webpage/llm-judgment/v1",

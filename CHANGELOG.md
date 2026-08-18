@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.10] - 2026-08-18
+### Fixed
+- Live `llm-judgment/v1` wrappers (`meta` + nested `page.kind`, `visualBudget`,
+  `id`, `findings`, `poaHints`) normalize onto the schema. Unknown finding
+  codes become hints; measured `wellmanifest/gui` kind/budgets stay unless
+  the model emits a valid enum. Z.AI candidates time out after 20s so later
+  OpenRouter routes can run.
+
 ## [0.2.9] - 2026-08-18
 ### Added
 - Structure lens lists `GUI-VIS-STRUCT-006` (H1 without H2 on heading-outline pages).
