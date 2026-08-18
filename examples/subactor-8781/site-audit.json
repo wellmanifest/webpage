@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -274,7 +274,7 @@
             "footer": true,
             "h1": "Subactor obok innych platform",
             "form": false,
-            "article": false,
+            "article": true,
             "listing": true,
             "headingOutline": [
               {
@@ -308,7 +308,7 @@
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 70
+                "count": 71
               }
             ],
             "colors": [
@@ -322,7 +322,7 @@
               },
               {
                 "value": "rgb(244, 248, 251)",
-                "count": 36
+                "count": 38
               },
               {
                 "value": "rgb(183, 247, 92)",
@@ -340,7 +340,7 @@
             "fontSizes": [
               {
                 "value": "17px",
-                "count": 49
+                "count": 50
               },
               {
                 "value": "14.875px",
@@ -442,7 +442,7 @@
             "footer": true,
             "h1": "Aktualne rejestry",
             "form": false,
-            "article": false,
+            "article": true,
             "listing": true,
             "headingOutline": [
               {
@@ -476,7 +476,7 @@
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 370
+                "count": 371
               }
             ],
             "colors": [
@@ -486,7 +486,7 @@
               },
               {
                 "value": "rgb(244, 248, 251)",
-                "count": 225
+                "count": 227
               },
               {
                 "value": "rgb(34, 211, 197)",
@@ -504,7 +504,7 @@
             "fontSizes": [
               {
                 "value": "17px",
-                "count": 264
+                "count": 265
               },
               {
                 "value": "14.875px",
@@ -605,7 +605,7 @@
             "footer": true,
             "h1": "Marketplace partnerów",
             "form": false,
-            "article": false,
+            "article": true,
             "listing": true,
             "headingOutline": [
               {
@@ -639,7 +639,7 @@
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 59
+                "count": 60
               }
             ],
             "colors": [
@@ -649,7 +649,7 @@
               },
               {
                 "value": "rgb(244, 248, 251)",
-                "count": 36
+                "count": 38
               },
               {
                 "value": "rgb(175, 192, 206)",
@@ -667,7 +667,7 @@
             "fontSizes": [
               {
                 "value": "17px",
-                "count": 39
+                "count": 40
               },
               {
                 "value": "14.875px",
@@ -768,7 +768,7 @@
             "footer": true,
             "h1": "Informacje prawne i zgodność UE",
             "form": false,
-            "article": false,
+            "article": true,
             "listing": false,
             "headingOutline": [
               {
@@ -850,13 +850,13 @@
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 68
+                "count": 69
               }
             ],
             "colors": [
               {
                 "value": "rgb(244, 248, 251)",
-                "count": 57
+                "count": 59
               },
               {
                 "value": "rgb(175, 192, 206)",
@@ -882,7 +882,7 @@
             "fontSizes": [
               {
                 "value": "17px",
-                "count": 46
+                "count": 47
               },
               {
                 "value": "19.125px",

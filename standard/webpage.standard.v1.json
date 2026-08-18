@@ -50,7 +50,7 @@
       "name": "Landmarks",
       "independentOfType": true,
       "adopt": "wellmanifest/gui",
-      "codes": ["GUI-VIS-STRUCT-002", "GUI-VIS-STRUCT-003", "GUI-VIS-STRUCT-004"]
+      "codes": ["GUI-VIS-STRUCT-002", "GUI-VIS-STRUCT-003", "GUI-VIS-STRUCT-004", "GUI-VIS-STRUCT-005"]
     },
     {
       "id": "navigation",

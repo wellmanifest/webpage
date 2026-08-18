@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.7] - 2026-08-18
+### Added
+- Structure lens lists `GUI-VIS-STRUCT-005` (article kind without `<article>`).
+
 ## [0.2.6] - 2026-08-18
 ### Added
 - Deterministic `WEB-NAV-002` (header nav link-set drift). `navLinks` ignore

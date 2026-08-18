@@ -30,6 +30,32 @@ def test_observation_keeps_gui_kind() -> None:
     assert item["page"]["visual"]["budgets"]["fontSizes"] >= 3
 
 
+def test_article_kind_without_article_landmark() -> None:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from audit_site import observation_page
+
+    raw = {
+        "title": "Compare",
+        "structure": {
+            "landmarks": {
+                "main": True,
+                "footer": True,
+                "h1": "Compare",
+                "form": False,
+                "article": False,
+                "listing": True,
+                "headingOutline": [{"tag": "H1", "text": "Compare"}],
+            },
+            "chrome": {},
+        },
+        "tokens": {"fontFamilyCount": 1, "colorCount": 4, "fontSizeCount": 3, "fontFamilies": [], "colors": [], "fontSizes": []},
+    }
+    item = observation_page("http://127.0.0.1:8789/compare", raw, {"title": "Compare"})
+    assert item["page"]["page"]["kind"] == "article"
+    assert any(d["code"] == "GUI-VIS-STRUCT-005" for d in item["page"]["defects"])
+    assert item["lenses"]["structure"][0]["code"] == "GUI-VIS-STRUCT-005"
+
+
 def test_contact_url_with_form_is_form_despite_long_outline() -> None:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
     from audit_site import observation_page

@@ -13,7 +13,7 @@ root = Path(".")
 version = (root / "VERSION").read_text().strip()
 standard = json.loads((root / "standard/webpage.standard.v1.json").read_text())
 schema = json.loads((root / "schemas/webpage-site-audit.schema.json").read_text())
-assert version == "0.2.6"
+assert version == "0.2.7"
 assert standard["subllm"] == {"application": "platform", "function": "site-audit", "home": "subactor/subllm"}
 assert "requiredPublicPaths" not in standard
 audit_src = (root / "scripts/audit_site.py").read_text()
@@ -43,6 +43,7 @@ assert "wellmanifest/poa" in standard["adopt"]
 assert "wellmanifest/policy-dsl" in standard["adopt"]
 assert "wellmanifest/modularity" in standard["adopt"]
 assert "wellmanifest/logs" in standard["adopt"]
+assert "GUI-VIS-STRUCT-005" in next(lens["codes"] for lens in standard["lenses"] if lens["id"] == "structure")
 assert {lens["id"] for lens in standard["lenses"]} >= {
     "kind", "visual", "structure", "navigation", "a11y", "seo", "consistency", "ux", "policy", "modularity"
 }
