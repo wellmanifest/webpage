@@ -255,6 +255,38 @@ def match_contact_page(pages: list[dict[str, Any]], href: str) -> dict[str, Any]
     return None
 
 
+def _norm_site_href(href: str, base: str) -> str:
+    absolute = same_origin_page(base, href) or urllib.parse.urljoin(base, href)
+    parsed = urllib.parse.urlparse(absolute)
+    path = parsed.path or "/"
+    action = (urllib.parse.parse_qs(parsed.query).get("action") or [""])[0]
+    return f"{path}?action={action}" if action else path
+
+
+def _footer_keyset(item: dict[str, Any], base: str) -> frozenset[str]:
+    sig = item.get("signals") or {}
+    return frozenset(
+        _norm_site_href(str(href), base)
+        for href in (sig.get("footerLinks") or [])
+        if href
+    )
+
+
+def _page_family(item: dict[str, Any]) -> str:
+    return str(((item.get("page") or {}).get("page") or {}).get("family") or "")
+
+
+def _token_values(item: dict[str, Any], key: str) -> set[str]:
+    rows = (((item.get("page") or {}).get("visual") or {}).get("tokens") or {}).get(key) or []
+    values: set[str] = set()
+    for row in rows:
+        if isinstance(row, dict) and row.get("value"):
+            values.add(str(row["value"]))
+        elif isinstance(row, str) and row:
+            values.add(row)
+    return values
+
+
 def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Deterministic lenses from observed signals. No product path table."""
     out: list[dict[str, Any]] = []
@@ -306,6 +338,45 @@ def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
         out.append(row)
         if matched is not None:
             matched.setdefault("lenses", {}).setdefault("ux", []).append(row)
+
+    if pages:
+        base = str(pages[0].get("url") or "/")
+        footer_sets = {_footer_keyset(item, base) for item in pages if _footer_keyset(item, base)}
+        if len(footer_sets) > 1:
+            out.append(finding(
+                "WEB-NAV-001",
+                "warn",
+                "navigation",
+                "Footer link sets differ across pages",
+            ))
+
+        by_family: dict[str, list[dict[str, Any]]] = {}
+        for item in pages:
+            family = _page_family(item)
+            if family:
+                by_family.setdefault(family, []).append(item)
+        for family, group in by_family.items():
+            if len(group) < 2:
+                continue
+            fonts = [_token_values(item, "fontFamilies") for item in group]
+            if any(item != fonts[0] for item in fonts[1:]):
+                out.append(finding(
+                    "WEB-CONS-002",
+                    "warn",
+                    "consistency",
+                    f"font families differ within family {family}",
+                ))
+            color_counts = [
+                int((((item.get("page") or {}).get("visual") or {}).get("counts") or {}).get("colors") or 0)
+                for item in group
+            ]
+            if max(color_counts) - min(color_counts) > 3:
+                out.append(finding(
+                    "WEB-CONS-001",
+                    "warn",
+                    "consistency",
+                    f"color counts differ within family {family}: {min(color_counts)}–{max(color_counts)}",
+                ))
     return out
 
 

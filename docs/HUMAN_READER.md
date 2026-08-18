@@ -11,8 +11,9 @@ The site audit is JSON, but you do not need to read it as a programmer.
 | `defects[].code` | What is broken, same code on every page type |
 
 If `intentKind` ≠ `kind`, stop. Do not argue about fonts. The user opened the
-wrong surface. Kind and intent are assigned by SubLLM (`platform/site-audit`),
-not by a path table in this pack.
+wrong surface. Kind and intent come from `wellmanifest/gui` `infer_kind`
+(URL + DOM + headings). SubLLM (`platform/site-audit`) may override them.
+This pack does not hardcode product paths.
 
 ## Severity
 

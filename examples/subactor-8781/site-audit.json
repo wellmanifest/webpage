@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -67,7 +67,7 @@
             "h1": "Wybierz pakiet dla swojej organizacji",
             "form": false,
             "article": false,
-            "listing": false,
+            "listing": true,
             "headingOutline": [
               {
                 "tag": "H1",
@@ -116,7 +116,7 @@
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 285
+                "count": 286
               }
             ],
             "colors": [
@@ -134,7 +134,7 @@
               },
               {
                 "value": "rgb(34, 211, 197)",
-                "count": 37
+                "count": 39
               },
               {
                 "value": "rgba(202, 214, 224, 0.18)",
@@ -164,7 +164,7 @@
             "fontSizes": [
               {
                 "value": "14.875px",
-                "count": 150
+                "count": 151
               },
               {
                 "value": "17px",
@@ -198,8 +198,9 @@
         "title": "Subactor — platforma autonomizacji procesów biznesowych",
         "viewport": true,
         "canonical": "http://127.0.0.1:8789/",
-        "linkCount": 10,
+        "linkCount": 11,
         "footerLinks": [
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -219,6 +220,7 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -271,7 +273,7 @@
             "h1": "Subactor obok innych platform",
             "form": false,
             "article": false,
-            "listing": false,
+            "listing": true,
             "headingOutline": [
               {
                 "tag": "H1",
@@ -444,7 +446,7 @@
             "h1": "Aktualne rejestry",
             "form": false,
             "article": false,
-            "listing": false,
+            "listing": true,
             "headingOutline": [
               {
                 "tag": "H1",
@@ -612,7 +614,7 @@
             "h1": "Marketplace partnerów",
             "form": false,
             "article": false,
-            "listing": false,
+            "listing": true,
             "headingOutline": [
               {
                 "tag": "H1",
@@ -1001,7 +1003,7 @@
             "h1": "Wybierz pakiet dla swojej organizacji",
             "form": true,
             "article": false,
-            "listing": false,
+            "listing": true,
             "headingOutline": [
               {
                 "tag": "H1",
@@ -1054,7 +1056,7 @@
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 310
+                "count": 311
               }
             ],
             "colors": [
@@ -1072,7 +1074,7 @@
               },
               {
                 "value": "rgb(34, 211, 197)",
-                "count": 37
+                "count": 39
               },
               {
                 "value": "rgba(202, 214, 224, 0.18)",
@@ -1102,7 +1104,7 @@
             "fontSizes": [
               {
                 "value": "14.875px",
-                "count": 156
+                "count": 157
               },
               {
                 "value": "17px",
@@ -1135,8 +1137,9 @@
         "title": "Subactor — platforma autonomizacji procesów biznesowych",
         "viewport": true,
         "canonical": "http://127.0.0.1:8789/",
-        "linkCount": 10,
+        "linkCount": 11,
         "footerLinks": [
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -1156,6 +1159,7 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",

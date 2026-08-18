@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.5] - 2026-08-18
+### Added
+- Deterministic `WEB-NAV-001` (footer link-set drift) and same-family
+  `WEB-CONS-001` / `WEB-CONS-002` (color-count / font-family drift).
+
 ## [0.2.4] - 2026-08-18
 ### Changed
 - `--skip-llm` records `WEB-LLM-001` as **warn**, not error. A skipped judge

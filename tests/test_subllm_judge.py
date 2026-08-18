@@ -137,6 +137,56 @@ def test_observation_findings_skip_contact_when_form_observed() -> None:
     ]
 
 
+def test_observation_findings_flag_footer_and_family_drift() -> None:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from audit_site import observation_findings
+
+    pages = [
+        {
+            "url": "http://127.0.0.1:8789/compare",
+            "page": {
+                "page": {"family": "content"},
+                "visual": {
+                    "counts": {"colors": 6},
+                    "tokens": {"fontFamilies": [{"value": "Inter"}]},
+                },
+            },
+            "signals": {
+                "lang": "pl",
+                "canonical": "http://127.0.0.1:8789/compare",
+                "viewport": True,
+                "formCount": 0,
+                "footerLinks": ["/compare", "/legal"],
+                "navLinks": [],
+            },
+            "lenses": {},
+        },
+        {
+            "url": "http://127.0.0.1:8789/legal",
+            "page": {
+                "page": {"family": "content"},
+                "visual": {
+                    "counts": {"colors": 11},
+                    "tokens": {"fontFamilies": [{"value": "Arial"}]},
+                },
+            },
+            "signals": {
+                "lang": "pl",
+                "canonical": "http://127.0.0.1:8789/legal",
+                "viewport": True,
+                "formCount": 0,
+                "footerLinks": ["/compare", "/legal", "/"],
+                "navLinks": [],
+            },
+            "lenses": {},
+        },
+    ]
+    codes = {row["code"] for row in observation_findings(pages)}
+    assert "WEB-NAV-001" in codes
+    assert "WEB-CONS-001" in codes
+    assert "WEB-CONS-002" in codes
+
+
 def test_parse_judgment_accepts_fenced_json() -> None:
     raw = {
         "schema": "wellmanifest.webpage/llm-judgment/v1",
