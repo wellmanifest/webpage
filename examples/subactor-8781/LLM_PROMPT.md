@@ -6,7 +6,7 @@ Kontynuuj z tym werdyktem. Z findings zrób listę ticketów (jeden lens = jeden
   "findings": [
     {
       "code": "WEB-LLM-001",
-      "severity": "error",
+      "severity": "warn",
       "lens": "ux",
       "message": "LLM judgment skipped (--skip-llm)"
     }

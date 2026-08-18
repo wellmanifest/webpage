@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -973,7 +973,7 @@
     },
     {
       "url": "http://127.0.0.1:8789/?action=contact",
-      "intentKind": "landing",
+      "intentKind": "form",
       "httpStatus": 200,
       "page": {
         "schema": "wellmanifest.gui/page/v1",
@@ -988,11 +988,11 @@
           "runtimeOwner": "subactor"
         },
         "page": {
-          "kind": "landing",
+          "kind": "form",
           "role": "public",
           "source": "observed",
           "url": "http://127.0.0.1:8789/?action=contact",
-          "family": "marketing"
+          "family": "account"
         },
         "structure": {
           "landmarks": {
@@ -1041,9 +1041,9 @@
         },
         "visual": {
           "budgets": {
-            "fontFamilies": 3,
-            "colors": 16,
-            "fontSizes": 8
+            "fontFamilies": 2,
+            "colors": 10,
+            "fontSizes": 6
           },
           "counts": {
             "fontFamilies": 1,
@@ -1126,8 +1126,7 @@
         "appliesPrinciples": [
           "site-footer",
           "page-kind",
-          "visual-budget",
-          "heading-outline"
+          "visual-budget"
         ],
         "defects": []
       },
@@ -1183,7 +1182,7 @@
   "findings": [
     {
       "code": "WEB-LLM-001",
-      "severity": "error",
+      "severity": "warn",
       "lens": "ux",
       "message": "LLM judgment skipped (--skip-llm)"
     }

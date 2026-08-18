@@ -566,7 +566,7 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             findings.append(finding("WEB-LLM-001", "error", "ux", str(exc)))
     else:
-        findings.append(finding("WEB-LLM-001", "error", "ux", "LLM judgment skipped (--skip-llm)"))
+        findings.append(finding("WEB-LLM-001", "warn", "ux", "LLM judgment skipped (--skip-llm)"))
 
     if judgment:
         apply_judgment(pages, judgment)

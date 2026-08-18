@@ -1,2 +1,2 @@
 {"schema": "wellmanifest.logs/event/v1", "eventType": "validation_started", "outcome": "OBSERVED", "ref": "subactor.www/site-audit"}
-{"schema": "wellmanifest.logs/event/v1", "eventType": "validation_failed", "outcome": "REJECTED", "ref": "subactor.www/site-audit", "findingCount": 1}
+{"schema": "wellmanifest.logs/event/v1", "eventType": "validation_passed", "outcome": "ACCEPTED", "ref": "subactor.www/site-audit", "findingCount": 1}

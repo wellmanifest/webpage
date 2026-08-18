@@ -3,15 +3,27 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import urllib.request
 from pathlib import Path
 from typing import Any
 
-SUBLLM_SRC = Path("/home/tom/github/subactor/subllm/src")
-if SUBLLM_SRC.is_dir():
-    sys.path.insert(0, str(SUBLLM_SRC))
+def _subllm_src() -> Path | None:
+    env = os.environ.get("SUBLLM_SRC")
+    if env:
+        return Path(env)
+    for parent in Path(__file__).resolve().parents:
+        candidate = parent / "subactor" / "subllm" / "src"
+        if (candidate / "subllm").is_dir():
+            return candidate
+    return None
+
+
+_SUBLLM = _subllm_src()
+if _SUBLLM is not None:
+    sys.path.insert(0, str(_SUBLLM))
 
 APPLICATION = "platform"
 FUNCTION = "site-audit"

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.4] - 2026-08-18
+### Changed
+- `--skip-llm` records `WEB-LLM-001` as **warn**, not error. A skipped judge
+  is an operator choice; a failed SubLLM call stays error.
+
 ## [0.2.3] - 2026-08-18
 ### Fixed
 - Follow contact hrefs advertised in nav/footer even when sitemap omitted them.

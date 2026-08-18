@@ -9,7 +9,7 @@ Soczewki są niezależne od typu strony. Najpierw kind, potem landmarks, potem b
 
 ## Findings
 
-- `WEB-LLM-001` [error/ux] LLM judgment skipped (--skip-llm)
+- `WEB-LLM-001` [warn/ux] LLM judgment skipped (--skip-llm)
 
 ## Strony
 
@@ -34,7 +34,7 @@ kind **article** (intent article) · fonty 1 · kolory 6 · rozmiary 3
 - brak defektów soczewek
 
 ### http://127.0.0.1:8789/?action=contact
-kind **landing** (intent landing) · fonty 1 · kolory 10 · rozmiary 5
+kind **form** (intent form) · fonty 1 · kolory 10 · rozmiary 5
 - brak defektów soczewek
 
 ## Wskazówki (LLM)

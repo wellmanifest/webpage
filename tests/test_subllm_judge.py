@@ -30,6 +30,41 @@ def test_observation_keeps_gui_kind() -> None:
     assert item["page"]["visual"]["budgets"]["fontSizes"] >= 3
 
 
+def test_contact_url_with_form_is_form_despite_long_outline() -> None:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from audit_site import observation_page
+
+    raw = {
+        "title": "Subactor — platforma",
+        "structure": {
+            "landmarks": {
+                "main": True,
+                "footer": True,
+                "h1": "Wybierz pakiet",
+                "form": True,
+                "article": False,
+                "listing": False,
+                "headingOutline": [
+                    {"tag": "H1", "text": "Wybierz pakiet"},
+                    {"tag": "H2", "text": "Integracje"},
+                    {"tag": "H2", "text": "Panel"},
+                    {"tag": "H3", "text": "Dziennik"},
+                    {"tag": "H2", "text": "Kontakt"},
+                ],
+            },
+            "chrome": {},
+        },
+        "tokens": {"fontFamilyCount": 1, "colorCount": 6, "fontSizeCount": 3, "fontFamilies": [], "colors": [], "fontSizes": []},
+    }
+    item = observation_page(
+        "http://127.0.0.1:8789/?action=contact",
+        raw,
+        {"title": "Subactor — platforma", "formCount": 1},
+    )
+    assert item["intentKind"] == "form"
+    assert item["page"]["page"]["kind"] == "form"
+
+
 def test_observation_findings_flag_canonical_contact_and_lang() -> None:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
     from audit_site import observation_findings
