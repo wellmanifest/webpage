@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -46,7 +46,7 @@
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
         "id": "observed/home",
         "version": "1.4.0",
-        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "title": "Wybierz pakiet dla swojej organizacji | Subactor",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -195,7 +195,7 @@
       },
       "signals": {
         "lang": "pl",
-        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "title": "Wybierz pakiet dla swojej organizacji | Subactor",
         "viewport": true,
         "canonical": "http://127.0.0.1:8789/",
         "linkCount": 12,
@@ -1216,7 +1216,6 @@
   ],
   "findings": [],
   "hints": [
-    "SEO-TITLE-002: Page title 'Subactor — platforma autonomizacji procesów biznesowych' is brand-generic while H1 'Wybierz pakiet dla swojej organizacji' is package-specific. Align title to reflect pricing intent.",
     "UX-STRUCTURE-001: Contact page renders full home page content (integrations, panel preview, full access sections) alongside the form. The form is not the primary focus. Isolate the contact form on its own page template.",
     "MODULARITY-001: Contact form is injected into home page via ?action=contact query param rather than having a dedicated route/template. This couples form rendering to landing content and prevents independent maintenance.",
     "UX-STRUCTURE-001: Contact form is embedded within full home page content, reducing form focus and creating cognitive overload.",
