@@ -1,46 +1,39 @@
-# Raport witryny — sub.actor site audit (http://127.0.0.1:8781/)
+# Raport witryny — sub.actor site audit (http://127.0.0.1:8789/)
 
 ## Jak czytać
 
-Obserwacja (DOM/tokeny) jest mierzona. **Kind, budżety i wskazówki pochodzą z LLM**
-przez `subllm platform/site-audit`
-(unresolved / —).
+Obserwacja (DOM/tokeny) i **kind/budżety** idą z `wellmanifest/gui` (`infer_kind` + `page_profiles`). LLM (`subllm platform/site-audit`, optional / —) może nadpisać kind/budżety i dodać wskazówki.
 Soczewki są niezależne od typu strony. Najpierw kind, potem landmarks, potem budżety.
 
-Źródło URL-i: **homepage-links**. sitemap=404 robots=404.
+Źródło URL-i: **sitemap**. sitemap=200 robots=200.
 
 ## Findings
 
-- `WEB-LLM-001` [error/ux] WEB-LLM-001: all SubLLM candidates failed: cursor: cursor-sdk not installed | cursor: cursor-sdk not installed | zai/glm-5.2: The read operation timed out | openrouter/glm-5.2: LLM output is not wellmanifest.webpage/llm-judgment/v1 | openrouter/grok-4.5: LLM output is not wellmanifest.webpage/llm-judgment/v1 | openrouter/gemini-3.6-flash: LLM output is not wellmanifest.webpage/llm-judgment/v1
+- `WEB-LLM-001` [error/ux] LLM judgment skipped (--skip-llm)
+- `GUI-VIS-COLOR-001` [warn/visual] 17 unique colors (budget 16)
+- `GUI-VIS-TYPE-001` [warn/visual] 17 font sizes (budget 8)
 
 ## Strony
 
-### http://127.0.0.1:8781/
-kind **unknown** (intent unknown) · fonty 2 · kolory 16 · rozmiary 3
+### http://127.0.0.1:8789/
+kind **landing** (intent landing) · fonty 3 · kolory 17 · rozmiary 17
+- `GUI-VIS-COLOR-001` 17 unique colors (budget 16)
+- `GUI-VIS-TYPE-001` 17 font sizes (budget 8)
+
+### http://127.0.0.1:8789/compare
+kind **article** (intent article) · fonty 1 · kolory 6 · rozmiary 3
 - brak defektów soczewek
 
-### http://127.0.0.1:8781/?action=landing
-kind **unknown** (intent unknown) · fonty 2 · kolory 16 · rozmiary 3
+### http://127.0.0.1:8789/registry
+kind **marketplace** (intent marketplace) · fonty 1 · kolory 5 · rozmiary 3
 - brak defektów soczewek
 
-### http://127.0.0.1:8781/compare?lang=en
-kind **unknown** (intent unknown) · fonty 2 · kolory 6 · rozmiary 5
+### http://127.0.0.1:8789/marketplace
+kind **marketplace** (intent marketplace) · fonty 1 · kolory 5 · rozmiary 3
 - brak defektów soczewek
 
-### http://127.0.0.1:8781/registry?lang=en
-kind **unknown** (intent unknown) · fonty 2 · kolory 5 · rozmiary 6
-- brak defektów soczewek
-
-### http://127.0.0.1:8781/legal?lang=en
-kind **unknown** (intent unknown) · fonty 1 · kolory 6 · rozmiary 5
-- brak defektów soczewek
-
-### http://127.0.0.1:8781/marketplace?lang=en
-kind **unknown** (intent unknown) · fonty 2 · kolory 5 · rozmiary 6
-- brak defektów soczewek
-
-### http://127.0.0.1:8781/?action=contact
-kind **unknown** (intent unknown) · fonty 2 · kolory 17 · rozmiary 3
+### http://127.0.0.1:8789/legal
+kind **article** (intent article) · fonty 1 · kolory 6 · rozmiary 3
 - brak defektów soczewek
 
 ## Wskazówki (LLM)

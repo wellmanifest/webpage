@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import re
 import socket
 import subprocess
@@ -18,10 +19,22 @@ from pathlib import Path
 from typing import Any
 
 PACK_ROOT = Path(__file__).resolve().parents[1]
-GUI_SCRIPTS = Path("/home/tom/github/wellmanifest/gui/scripts")
+
+
+def gui_scripts_dir() -> Path:
+    env = os.environ.get("WELLMANIFEST_GUI_SCRIPTS")
+    if env:
+        return Path(env)
+    sibling = PACK_ROOT.parent / "gui" / "scripts"
+    if (sibling / "gui_page.py").is_file():
+        return sibling
+    raise RuntimeError("wellmanifest/gui scripts not found; set WELLMANIFEST_GUI_SCRIPTS")
+
+
+GUI_SCRIPTS = gui_scripts_dir()
 sys.path.insert(0, str(GUI_SCRIPTS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from gui_page import build_page  # noqa: E402
+from gui_page import build_page, defects_for_page  # noqa: E402
 from subllm_judge import complete as subllm_complete  # noqa: E402
 
 STANDARD = json.loads((PACK_ROOT / "standard/webpage.standard.v1.json").read_text())
@@ -171,18 +184,26 @@ def observation_page(url: str, raw: dict[str, Any], signals: dict[str, Any]) -> 
         source="observed",
         page_id=f"observed/{path_of(url).strip('/').replace('?', '-') or 'home'}",
     )
-    page["defects"] = []
-    page["page"]["kind"] = "unknown"
-    page["visual"]["budgets"] = {"fontFamilies": 1, "colors": 1, "fontSizes": 1}
+    page["defects"] = defects_for_page(page)
+    kind = (page.get("page") or {}).get("kind") or "unknown"
     if raw.get("url"):
         page["page"]["url"] = raw["url"]
+    lenses = {lens["id"]: [] for lens in STANDARD["lenses"]}
+    for defect in page["defects"]:
+        code = str(defect.get("code") or "")
+        if code.startswith("GUI-PAGE-KIND"):
+            lenses["kind"].append(defect)
+        elif code.startswith("GUI-PAGE-CHROME") or code.startswith("GUI-VIS-STRUCT"):
+            lenses["structure"].append(defect)
+        else:
+            lenses["visual"].append(defect)
     return {
         "url": url,
-        "intentKind": "unknown",
+        "intentKind": kind,
         "httpStatus": 200,
         "page": page,
         "signals": signals,
-        "lenses": {lens["id"]: [] for lens in STANDARD["lenses"]},
+        "lenses": lenses,
     }
 
 
@@ -256,9 +277,11 @@ def human_report(audit: dict[str, Any]) -> str:
         "",
         "## Jak czytać",
         "",
-        "Obserwacja (DOM/tokeny) jest mierzona. **Kind, budżety i wskazówki pochodzą z LLM**",
-        f"przez `subllm {route.get('application', 'platform')}/{route.get('function', 'site-audit')}`",
-        f"({route.get('provider') or 'unresolved'} / {route.get('model') or '—'}).",
+        "Obserwacja (DOM/tokeny) i **kind/budżety** idą z `wellmanifest/gui` "
+        "(`infer_kind` + `page_profiles`). LLM (`subllm "
+        f"{route.get('application', 'platform')}/{route.get('function', 'site-audit')}`"
+        f", {route.get('provider') or 'optional'} / {route.get('model') or '—'}) "
+        "może nadpisać kind/budżety i dodać wskazówki.",
         "Soczewki są niezależne od typu strony. Najpierw kind, potem landmarks, potem budżety.",
         "",
         f"Źródło URL-i: **{audit['site']['source']}**. sitemap={audit['site']['sitemapStatus']} robots={audit['site']['robotsStatus']}.",
@@ -419,6 +442,16 @@ def main() -> int:
     }
 
     findings: list[dict[str, Any]] = []
+    if sitemap_status != 200:
+        findings.append(finding(
+            "WEB-SITEMAP-001", "error", "seo",
+            f"sitemap.xml returned {sitemap_status}", sitemap_url,
+        ))
+    if robots_status != 200:
+        findings.append(finding(
+            "WEB-ROBOTS-001", "error", "seo",
+            f"robots.txt returned {robots_status}", robots_url,
+        ))
     for item in pages:
         findings.extend(policy_findings(item["url"]))
 
@@ -440,10 +473,14 @@ def main() -> int:
     if judgment:
         apply_judgment(pages, judgment)
         findings.extend(judgment.get("siteFindings") or [])
-        for item in pages:
-            for lens_findings in (item.get("lenses") or {}).values():
-                findings.extend(lens_findings)
         hints = list(judgment.get("hints") or [])
+    for item in pages:
+        for lens_id, lens_findings in (item.get("lenses") or {}).items():
+            for defect in lens_findings:
+                row = dict(defect)
+                row.setdefault("lens", lens_id)
+                row.setdefault("url", item.get("url") or "")
+                findings.append(row)
 
     audit = {
         "schema": "wellmanifest.webpage/site-audit/v1",

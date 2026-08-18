@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1] - 2026-08-18
+### Fixed
+- Keep `wellmanifest/gui` `infer_kind` and profile budgets when SubLLM fails.
+- Emit `WEB-SITEMAP-001` / `WEB-ROBOTS-001` from HTTP status, not from the LLM.
+- Resolve `gui/scripts` as a sibling path (no machine-local `/home/tom/...`).
+
 ## [0.2.0] - 2026-08-18
 ### Changed
 - Kind, visual budgets, site findings and hints come from SubLLM

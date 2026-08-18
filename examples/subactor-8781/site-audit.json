@@ -2,8 +2,8 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.0",
-  "title": "sub.actor site audit (http://127.0.0.1:8781/)",
+  "version": "0.2.1",
+  "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
     "shape": "runtime_service",
@@ -30,23 +30,23 @@
     "model": ""
   },
   "site": {
-    "baseUrl": "http://127.0.0.1:8781/",
-    "sitemapUrl": "http://127.0.0.1:8781/sitemap.xml",
-    "sitemapStatus": 404,
-    "robotsStatus": 404,
-    "source": "homepage-links"
+    "baseUrl": "http://127.0.0.1:8789/",
+    "sitemapUrl": "http://127.0.0.1:8789/sitemap.xml",
+    "sitemapStatus": 200,
+    "robotsStatus": 200,
+    "source": "sitemap"
   },
   "pages": [
     {
-      "url": "http://127.0.0.1:8781/",
-      "intentKind": "unknown",
+      "url": "http://127.0.0.1:8789/",
+      "intentKind": "landing",
       "httpStatus": 200,
       "page": {
         "schema": "wellmanifest.gui/page/v1",
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
         "id": "observed/home",
         "version": "1.4.0",
-        "title": "Subactor — a platform for autonomizing business processes",
+        "title": "Subactor — platforma autonomizacji procesów biznesowych",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -54,84 +54,40 @@
           "runtimeOwner": "subactor"
         },
         "page": {
-          "kind": "unknown",
+          "kind": "landing",
           "role": "public",
           "source": "observed",
-          "url": "http://127.0.0.1:8781/?viewport=tablet&item_view=cards&lang=en&currency=EUR&theme=dark",
+          "url": "http://127.0.0.1:8789/",
           "family": "marketing"
         },
         "structure": {
           "landmarks": {
             "main": true,
             "footer": true,
-            "h1": "Subactor is a platform for autonomizing business processes.",
+            "h1": "Wybierz pakiet dla swojej organizacji",
             "form": false,
-            "article": true,
+            "article": false,
             "listing": false,
             "headingOutline": [
               {
                 "tag": "H1",
-                "text": "Subactor is a platform for autonomizing business processes."
+                "text": "Wybierz pakiet dla swojej organizacji"
               },
               {
                 "tag": "H2",
-                "text": "From an event to a verified outcome"
-              },
-              {
-                "tag": "H3",
-                "text": "Orders from several stores"
-              },
-              {
-                "tag": "H3",
-                "text": "Invoices without retyping"
-              },
-              {
-                "tag": "H3",
-                "text": "An outage noticed before customers"
-              },
-              {
-                "tag": "H3",
-                "text": "Simply connect the accounts used by your process"
+                "text": "Dostępne integracje i connectory"
               },
               {
                 "tag": "H2",
-                "text": "How many actions do your processes perform?"
+                "text": "Panel Operacyjny Subactor (Podgląd)"
               },
               {
                 "tag": "H3",
-                "text": "Basic"
-              },
-              {
-                "tag": "H3",
-                "text": "Pro"
-              },
-              {
-                "tag": "H3",
-                "text": "Max"
+                "text": "Dziennik Aktywności w Czasie Rzeczywistym"
               },
               {
                 "tag": "H2",
-                "text": "Four things we put in writing"
-              },
-              {
-                "tag": "H3",
-                "text": "No hidden costs"
-              },
-              {
-                "tag": "H3",
-                "text": "No lock-in"
-              },
-              {
-                "tag": "H3",
-                "text": "No card to start"
-              },
-              {
-                "tag": "H3",
-                "text": "VAT invoice in the plan currency"
-              },
-              {
-                "tag": "H2",
-                "text": "Legal information and EU compliance"
+                "text": "Pełny dostęp do Panelu Operacyjnego"
               }
             ]
           },
@@ -140,111 +96,143 @@
             "itemViewSwitch": false,
             "sectionAddButton": false,
             "sectionViewToolbar": false,
-            "viewport": true,
-            "itemView": true,
-            "hamburger": true
+            "viewport": false,
+            "itemView": false,
+            "hamburger": false
           }
         },
         "visual": {
           "budgets": {
-            "fontFamilies": 1,
-            "colors": 1,
-            "fontSizes": 1
+            "fontFamilies": 3,
+            "colors": 16,
+            "fontSizes": 8
           },
           "counts": {
-            "fontFamilies": 2,
-            "colors": 16,
-            "fontSizes": 3
+            "fontFamilies": 3,
+            "colors": 17,
+            "fontSizes": 17
           },
           "tokens": {
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 909
+                "count": 224
+              },
+              {
+                "value": "ui-monospace",
+                "count": 41
               },
               {
                 "value": "Arial",
-                "count": 5
+                "count": 14
               }
             ],
             "colors": [
               {
-                "value": "rgb(255, 255, 255)",
-                "count": 438
+                "value": "rgb(244, 248, 251)",
+                "count": 288
               },
               {
-                "value": "rgb(110, 231, 183)",
-                "count": 375
+                "value": "rgb(175, 192, 206)",
+                "count": 153
               },
               {
-                "value": "rgb(242, 242, 242)",
-                "count": 360
+                "value": "rgb(183, 247, 92)",
+                "count": 62
               },
               {
-                "value": "rgb(92, 255, 228)",
-                "count": 299
+                "value": "rgba(202, 214, 224, 0.18)",
+                "count": 21
               },
               {
-                "value": "rgb(208, 208, 208)",
-                "count": 200
-              },
-              {
-                "value": "rgb(154, 154, 154)",
-                "count": 79
-              },
-              {
-                "value": "rgb(6, 32, 30)",
-                "count": 38
-              },
-              {
-                "value": "rgb(22, 22, 22)",
-                "count": 32
-              },
-              {
-                "value": "rgb(17, 17, 17)",
-                "count": 22
-              },
-              {
-                "value": "rgb(156, 201, 239)",
-                "count": 22
-              },
-              {
-                "value": "rgb(252, 211, 77)",
+                "value": "rgb(34, 211, 197)",
                 "count": 16
               },
               {
-                "value": "rgba(92, 255, 228, 0.18)",
-                "count": 14
+                "value": "rgba(16, 38, 63, 0.82)",
+                "count": 13
               },
               {
-                "value": "rgba(16, 185, 129, 0.15)",
-                "count": 11
+                "value": "rgb(0, 0, 238)",
+                "count": 10
               },
               {
-                "value": "rgba(59, 130, 246, 0.15)",
+                "value": "rgb(7, 17, 31)",
+                "count": 8
+              },
+              {
+                "value": "rgba(13, 27, 42, 0.92)",
+                "count": 5
+              },
+              {
+                "value": "rgba(183, 247, 92, 0.15)",
+                "count": 3
+              },
+              {
+                "value": "rgba(183, 247, 92, 0.3)",
+                "count": 3
+              },
+              {
+                "value": "rgba(255, 255, 255, 0.02)",
                 "count": 2
               },
               {
-                "value": "color(srgb 0 0 0 / 0.88)",
+                "value": "rgba(183, 247, 92, 0.2)",
                 "count": 1
               },
               {
-                "value": "rgba(16, 185, 129, 0.4)",
+                "value": "rgba(34, 211, 197, 0.15)",
+                "count": 1
+              },
+              {
+                "value": "rgba(34, 211, 197, 0.3)",
+                "count": 1
+              },
+              {
+                "value": "rgba(7, 17, 31, 0.65)",
                 "count": 1
               }
             ],
             "fontSizes": [
               {
-                "value": "15.75px",
-                "count": 606
+                "value": "16px",
+                "count": 87
               },
               {
-                "value": "18px",
-                "count": 267
+                "value": "15.2px",
+                "count": 62
               },
               {
-                "value": "27px",
-                "count": 41
+                "value": "12px",
+                "count": 35
+              },
+              {
+                "value": "14px",
+                "count": 19
+              },
+              {
+                "value": "12.8px",
+                "count": 18
+              },
+              {
+                "value": "14.4px",
+                "count": 15
+              },
+              {
+                "value": "13.6px",
+                "count": 9
+              },
+              {
+                "value": "22.4px",
+                "count": 7
+              },
+              {
+                "value": "19.5px",
+                "count": 5
+              },
+              {
+                "value": "25.6px",
+                "count": 4
               }
             ]
           }
@@ -255,46 +243,57 @@
           "visual-budget",
           "heading-outline"
         ],
-        "defects": []
+        "defects": [
+          {
+            "code": "GUI-VIS-COLOR-001",
+            "severity": "warn",
+            "message": "17 unique colors (budget 16)"
+          },
+          {
+            "code": "GUI-VIS-TYPE-001",
+            "severity": "warn",
+            "message": "17 font sizes (budget 8)"
+          }
+        ]
       },
       "signals": {
-        "lang": "en",
-        "title": "Subactor — a platform for autonomizing business processes",
+        "lang": "pl",
+        "title": "Subactor — platforma autonomizacji procesów biznesowych",
         "viewport": true,
         "canonical": "",
-        "linkCount": 14,
+        "linkCount": 5,
         "footerLinks": [
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/marketplace?lang=en",
-          "/legal?lang=en",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
           "/?action=contact"
         ],
-        "navLinks": [
-          "/?action=landing"
-        ],
+        "navLinks": [],
         "pageLinks": [
-          "/?action=landing",
-          "#use-cases",
-          "#offers",
-          "#offer-saas-start",
-          "#offer-saas-business",
-          "#offer-prepaid-actions",
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/legal?lang=en",
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/marketplace?lang=en",
-          "/legal?lang=en",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
           "/?action=contact"
         ],
-        "buttonCount": 9,
+        "buttonCount": 8,
         "formCount": 0
       },
       "lenses": {
         "kind": [],
-        "visual": [],
+        "visual": [
+          {
+            "code": "GUI-VIS-COLOR-001",
+            "severity": "warn",
+            "message": "17 unique colors (budget 16)"
+          },
+          {
+            "code": "GUI-VIS-TYPE-001",
+            "severity": "warn",
+            "message": "17 font sizes (budget 8)"
+          }
+        ],
         "structure": [],
         "navigation": [],
         "a11y": [],
@@ -306,281 +305,13 @@
       }
     },
     {
-      "url": "http://127.0.0.1:8781/?action=landing",
-      "intentKind": "unknown",
+      "url": "http://127.0.0.1:8789/compare",
+      "intentKind": "article",
       "httpStatus": 200,
       "page": {
         "schema": "wellmanifest.gui/page/v1",
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
-        "id": "observed/-action=landing",
-        "version": "1.4.0",
-        "title": "Subactor — a platform for autonomizing business processes",
-        "placement": {
-          "home": "subactor",
-          "shape": "runtime_service",
-          "adopt": "wellmanifest/gui",
-          "runtimeOwner": "subactor"
-        },
-        "page": {
-          "kind": "unknown",
-          "role": "public",
-          "source": "observed",
-          "url": "http://127.0.0.1:8781/?action=landing&viewport=tablet&item_view=cards&lang=en&currency=EUR&theme=dark",
-          "family": "marketing"
-        },
-        "structure": {
-          "landmarks": {
-            "main": true,
-            "footer": true,
-            "h1": "Subactor is a platform for autonomizing business processes.",
-            "form": false,
-            "article": true,
-            "listing": false,
-            "headingOutline": [
-              {
-                "tag": "H1",
-                "text": "Subactor is a platform for autonomizing business processes."
-              },
-              {
-                "tag": "H2",
-                "text": "From an event to a verified outcome"
-              },
-              {
-                "tag": "H3",
-                "text": "Orders from several stores"
-              },
-              {
-                "tag": "H3",
-                "text": "Invoices without retyping"
-              },
-              {
-                "tag": "H3",
-                "text": "An outage noticed before customers"
-              },
-              {
-                "tag": "H3",
-                "text": "Simply connect the accounts used by your process"
-              },
-              {
-                "tag": "H2",
-                "text": "How many actions do your processes perform?"
-              },
-              {
-                "tag": "H3",
-                "text": "Basic"
-              },
-              {
-                "tag": "H3",
-                "text": "Pro"
-              },
-              {
-                "tag": "H3",
-                "text": "Max"
-              },
-              {
-                "tag": "H2",
-                "text": "Four things we put in writing"
-              },
-              {
-                "tag": "H3",
-                "text": "No hidden costs"
-              },
-              {
-                "tag": "H3",
-                "text": "No lock-in"
-              },
-              {
-                "tag": "H3",
-                "text": "No card to start"
-              },
-              {
-                "tag": "H3",
-                "text": "VAT invoice in the plan currency"
-              },
-              {
-                "tag": "H2",
-                "text": "Legal information and EU compliance"
-              }
-            ]
-          },
-          "chrome": {
-            "itemSectionToolbar": false,
-            "itemViewSwitch": false,
-            "sectionAddButton": false,
-            "sectionViewToolbar": false,
-            "viewport": true,
-            "itemView": true,
-            "hamburger": true
-          }
-        },
-        "visual": {
-          "budgets": {
-            "fontFamilies": 1,
-            "colors": 1,
-            "fontSizes": 1
-          },
-          "counts": {
-            "fontFamilies": 2,
-            "colors": 16,
-            "fontSizes": 3
-          },
-          "tokens": {
-            "fontFamilies": [
-              {
-                "value": "Inter",
-                "count": 909
-              },
-              {
-                "value": "Arial",
-                "count": 5
-              }
-            ],
-            "colors": [
-              {
-                "value": "rgb(255, 255, 255)",
-                "count": 438
-              },
-              {
-                "value": "rgb(110, 231, 183)",
-                "count": 375
-              },
-              {
-                "value": "rgb(242, 242, 242)",
-                "count": 360
-              },
-              {
-                "value": "rgb(92, 255, 228)",
-                "count": 299
-              },
-              {
-                "value": "rgb(208, 208, 208)",
-                "count": 200
-              },
-              {
-                "value": "rgb(154, 154, 154)",
-                "count": 79
-              },
-              {
-                "value": "rgb(6, 32, 30)",
-                "count": 38
-              },
-              {
-                "value": "rgb(22, 22, 22)",
-                "count": 32
-              },
-              {
-                "value": "rgb(17, 17, 17)",
-                "count": 22
-              },
-              {
-                "value": "rgb(156, 201, 239)",
-                "count": 22
-              },
-              {
-                "value": "rgb(252, 211, 77)",
-                "count": 16
-              },
-              {
-                "value": "rgba(92, 255, 228, 0.18)",
-                "count": 14
-              },
-              {
-                "value": "rgba(16, 185, 129, 0.15)",
-                "count": 11
-              },
-              {
-                "value": "rgba(59, 130, 246, 0.15)",
-                "count": 2
-              },
-              {
-                "value": "color(srgb 0 0 0 / 0.88)",
-                "count": 1
-              },
-              {
-                "value": "rgba(16, 185, 129, 0.4)",
-                "count": 1
-              }
-            ],
-            "fontSizes": [
-              {
-                "value": "15.75px",
-                "count": 606
-              },
-              {
-                "value": "18px",
-                "count": 267
-              },
-              {
-                "value": "27px",
-                "count": 41
-              }
-            ]
-          }
-        },
-        "appliesPrinciples": [
-          "site-footer",
-          "page-kind",
-          "visual-budget",
-          "heading-outline"
-        ],
-        "defects": []
-      },
-      "signals": {
-        "lang": "en",
-        "title": "Subactor — a platform for autonomizing business processes",
-        "viewport": true,
-        "canonical": "",
-        "linkCount": 14,
-        "footerLinks": [
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/marketplace?lang=en",
-          "/legal?lang=en",
-          "/?action=contact"
-        ],
-        "navLinks": [
-          "/?action=landing"
-        ],
-        "pageLinks": [
-          "/?action=landing",
-          "#use-cases",
-          "#offers",
-          "#offer-saas-start",
-          "#offer-saas-business",
-          "#offer-prepaid-actions",
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/legal?lang=en",
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/marketplace?lang=en",
-          "/legal?lang=en",
-          "/?action=contact"
-        ],
-        "buttonCount": 9,
-        "formCount": 0
-      },
-      "lenses": {
-        "kind": [],
-        "visual": [],
-        "structure": [],
-        "navigation": [],
-        "a11y": [],
-        "seo": [],
-        "consistency": [],
-        "ux": [],
-        "policy": [],
-        "modularity": []
-      }
-    },
-    {
-      "url": "http://127.0.0.1:8781/compare?lang=en",
-      "intentKind": "unknown",
-      "httpStatus": 200,
-      "page": {
-        "schema": "wellmanifest.gui/page/v1",
-        "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
-        "id": "observed/compare-lang=en",
+        "id": "observed/compare",
         "version": "1.4.0",
         "title": "Subactor next to other platforms",
         "placement": {
@@ -590,10 +321,10 @@
           "runtimeOwner": "subactor"
         },
         "page": {
-          "kind": "unknown",
+          "kind": "article",
           "role": "public",
           "source": "observed",
-          "url": "http://127.0.0.1:8781/compare?lang=en",
+          "url": "http://127.0.0.1:8789/compare",
           "family": "content"
         },
         "structure": {
@@ -623,71 +354,59 @@
         },
         "visual": {
           "budgets": {
-            "fontFamilies": 1,
-            "colors": 1,
-            "fontSizes": 1
+            "fontFamilies": 2,
+            "colors": 8,
+            "fontSizes": 6
           },
           "counts": {
-            "fontFamilies": 2,
+            "fontFamilies": 1,
             "colors": 6,
-            "fontSizes": 5
+            "fontSizes": 3
           },
           "tokens": {
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 57
-              },
-              {
-                "value": "ui-monospace",
-                "count": 11
+                "count": 70
               }
             ],
             "colors": [
               {
-                "value": "rgb(242, 242, 242)",
-                "count": 49
-              },
-              {
                 "value": "rgb(34, 211, 197)",
-                "count": 42
+                "count": 46
               },
               {
-                "value": "rgb(255, 255, 255)",
-                "count": 31
+                "value": "rgb(175, 192, 206)",
+                "count": 44
+              },
+              {
+                "value": "rgb(244, 248, 251)",
+                "count": 36
               },
               {
                 "value": "rgb(183, 247, 92)",
                 "count": 10
               },
               {
-                "value": "rgb(154, 154, 154)",
+                "value": "rgba(202, 214, 224, 0.18)",
                 "count": 4
               },
               {
-                "value": "rgb(17, 17, 17)",
+                "value": "rgba(16, 38, 63, 0.82)",
                 "count": 2
               }
             ],
             "fontSizes": [
               {
-                "value": "17.1px",
-                "count": 34
+                "value": "17px",
+                "count": 49
               },
               {
-                "value": "18px",
-                "count": 14
+                "value": "14.875px",
+                "count": 20
               },
               {
-                "value": "14.4px",
-                "count": 11
-              },
-              {
-                "value": "15.75px",
-                "count": 8
-              },
-              {
-                "value": "36px",
+                "value": "19.125px",
                 "count": 1
               }
             ]
@@ -706,20 +425,27 @@
         "title": "Subactor next to other platforms",
         "viewport": true,
         "canonical": "",
-        "linkCount": 10,
+        "linkCount": 12,
         "footerLinks": [
           "/compare",
           "/registry",
           "/marketplace",
           "/legal",
-          "/?action=contact"
+          "/?action=contact",
+          "/?lang=en"
         ],
         "navLinks": [
           "/?lang=en",
           "/compare",
           "/registry",
           "/marketplace",
-          "/legal"
+          "/legal",
+          "/?action=contact",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
         ],
         "pageLinks": [
           "/?lang=en",
@@ -727,11 +453,13 @@
           "/registry",
           "/marketplace",
           "/legal",
+          "/?action=contact",
           "/compare",
           "/registry",
           "/marketplace",
           "/legal",
-          "/?action=contact"
+          "/?action=contact",
+          "/?lang=en"
         ],
         "buttonCount": 0,
         "formCount": 0
@@ -750,13 +478,13 @@
       }
     },
     {
-      "url": "http://127.0.0.1:8781/registry?lang=en",
-      "intentKind": "unknown",
+      "url": "http://127.0.0.1:8789/registry",
+      "intentKind": "marketplace",
       "httpStatus": 200,
       "page": {
         "schema": "wellmanifest.gui/page/v1",
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
-        "id": "observed/registry-lang=en",
+        "id": "observed/registry",
         "version": "1.4.0",
         "title": "Current registries",
         "placement": {
@@ -766,10 +494,10 @@
           "runtimeOwner": "subactor"
         },
         "page": {
-          "kind": "unknown",
+          "kind": "marketplace",
           "role": "public",
           "source": "observed",
-          "url": "http://127.0.0.1:8781/registry?lang=en",
+          "url": "http://127.0.0.1:8789/registry",
           "family": "commerce"
         },
         "structure": {
@@ -799,71 +527,55 @@
         },
         "visual": {
           "budgets": {
-            "fontFamilies": 1,
-            "colors": 1,
-            "fontSizes": 1
+            "fontFamilies": 3,
+            "colors": 8,
+            "fontSizes": 5
           },
           "counts": {
-            "fontFamilies": 2,
+            "fontFamilies": 1,
             "colors": 5,
-            "fontSizes": 6
+            "fontSizes": 3
           },
           "tokens": {
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 272
-              },
-              {
-                "value": "ui-monospace",
-                "count": 96
+                "count": 370
               }
             ],
             "colors": [
               {
-                "value": "rgb(242, 242, 242)",
-                "count": 307
+                "value": "rgb(175, 192, 206)",
+                "count": 302
               },
               {
-                "value": "rgb(255, 255, 255)",
-                "count": 220
+                "value": "rgb(244, 248, 251)",
+                "count": 225
               },
               {
                 "value": "rgb(34, 211, 197)",
-                "count": 200
+                "count": 204
               },
               {
-                "value": "rgb(154, 154, 154)",
+                "value": "rgba(202, 214, 224, 0.18)",
                 "count": 9
               },
               {
-                "value": "rgb(17, 17, 17)",
+                "value": "rgba(16, 38, 63, 0.82)",
                 "count": 2
               }
             ],
             "fontSizes": [
               {
-                "value": "17.1px",
-                "count": 240
+                "value": "17px",
+                "count": 264
               },
               {
-                "value": "14.4px",
-                "count": 90
+                "value": "14.875px",
+                "count": 105
               },
               {
-                "value": "18px",
-                "count": 23
-              },
-              {
-                "value": "15.75px",
-                "count": 8
-              },
-              {
-                "value": "14.76px",
-                "count": 6
-              },
-              {
-                "value": "36px",
+                "value": "19.125px",
                 "count": 1
               }
             ]
@@ -881,20 +593,27 @@
         "title": "Current registries",
         "viewport": true,
         "canonical": "",
-        "linkCount": 10,
+        "linkCount": 12,
         "footerLinks": [
           "/compare",
           "/registry",
           "/marketplace",
           "/legal",
-          "/?action=contact"
+          "/?action=contact",
+          "/?lang=en"
         ],
         "navLinks": [
           "/?lang=en",
           "/compare",
           "/registry",
           "/marketplace",
-          "/legal"
+          "/legal",
+          "/?action=contact",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
         ],
         "pageLinks": [
           "/?lang=en",
@@ -902,11 +621,13 @@
           "/registry",
           "/marketplace",
           "/legal",
+          "/?action=contact",
           "/compare",
           "/registry",
           "/marketplace",
           "/legal",
-          "/?action=contact"
+          "/?action=contact",
+          "/?lang=en"
         ],
         "buttonCount": 0,
         "formCount": 0
@@ -925,15 +646,15 @@
       }
     },
     {
-      "url": "http://127.0.0.1:8781/legal?lang=en",
-      "intentKind": "unknown",
+      "url": "http://127.0.0.1:8789/marketplace",
+      "intentKind": "marketplace",
       "httpStatus": 200,
       "page": {
         "schema": "wellmanifest.gui/page/v1",
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
-        "id": "observed/legal-lang=en",
+        "id": "observed/marketplace",
         "version": "1.4.0",
-        "title": "Missing operator details — sales blocker",
+        "title": "Partner marketplace",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -941,24 +662,192 @@
           "runtimeOwner": "subactor"
         },
         "page": {
-          "kind": "unknown",
+          "kind": "marketplace",
           "role": "public",
           "source": "observed",
-          "url": "http://127.0.0.1:8781/legal?lang=en",
-          "family": "content"
+          "url": "http://127.0.0.1:8789/marketplace",
+          "family": "commerce"
         },
         "structure": {
           "landmarks": {
             "main": true,
             "footer": true,
-            "h1": "Missing operator details — sales blocker",
+            "h1": "Partner marketplace",
             "form": false,
             "article": false,
             "listing": false,
             "headingOutline": [
               {
                 "tag": "H1",
-                "text": "Missing operator details — sales blocker"
+                "text": "Partner marketplace"
+              }
+            ]
+          },
+          "chrome": {
+            "itemSectionToolbar": false,
+            "itemViewSwitch": false,
+            "sectionAddButton": false,
+            "sectionViewToolbar": false,
+            "viewport": false,
+            "itemView": false,
+            "hamburger": false
+          }
+        },
+        "visual": {
+          "budgets": {
+            "fontFamilies": 3,
+            "colors": 8,
+            "fontSizes": 5
+          },
+          "counts": {
+            "fontFamilies": 1,
+            "colors": 5,
+            "fontSizes": 3
+          },
+          "tokens": {
+            "fontFamilies": [
+              {
+                "value": "Inter",
+                "count": 59
+              }
+            ],
+            "colors": [
+              {
+                "value": "rgb(34, 211, 197)",
+                "count": 42
+              },
+              {
+                "value": "rgb(244, 248, 251)",
+                "count": 36
+              },
+              {
+                "value": "rgb(175, 192, 206)",
+                "count": 36
+              },
+              {
+                "value": "rgba(202, 214, 224, 0.18)",
+                "count": 4
+              },
+              {
+                "value": "rgba(16, 38, 63, 0.82)",
+                "count": 2
+              }
+            ],
+            "fontSizes": [
+              {
+                "value": "17px",
+                "count": 39
+              },
+              {
+                "value": "14.875px",
+                "count": 19
+              },
+              {
+                "value": "19.125px",
+                "count": 1
+              }
+            ]
+          }
+        },
+        "appliesPrinciples": [
+          "site-footer",
+          "page-kind",
+          "visual-budget"
+        ],
+        "defects": []
+      },
+      "signals": {
+        "lang": "en",
+        "title": "Partner marketplace",
+        "viewport": true,
+        "canonical": "",
+        "linkCount": 12,
+        "footerLinks": [
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/?lang=en"
+        ],
+        "navLinks": [
+          "/?lang=en",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
+        ],
+        "pageLinks": [
+          "/?lang=en",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/?lang=en"
+        ],
+        "buttonCount": 0,
+        "formCount": 0
+      },
+      "lenses": {
+        "kind": [],
+        "visual": [],
+        "structure": [],
+        "navigation": [],
+        "a11y": [],
+        "seo": [],
+        "consistency": [],
+        "ux": [],
+        "policy": [],
+        "modularity": []
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8789/legal",
+      "intentKind": "article",
+      "httpStatus": 200,
+      "page": {
+        "schema": "wellmanifest.gui/page/v1",
+        "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
+        "id": "observed/legal",
+        "version": "1.4.0",
+        "title": "Legal information and EU compliance",
+        "placement": {
+          "home": "subactor",
+          "shape": "runtime_service",
+          "adopt": "wellmanifest/gui",
+          "runtimeOwner": "subactor"
+        },
+        "page": {
+          "kind": "article",
+          "role": "public",
+          "source": "observed",
+          "url": "http://127.0.0.1:8789/legal",
+          "family": "content"
+        },
+        "structure": {
+          "landmarks": {
+            "main": true,
+            "footer": true,
+            "h1": "Legal information and EU compliance",
+            "form": false,
+            "article": false,
+            "listing": false,
+            "headingOutline": [
+              {
+                "tag": "H1",
+                "text": "Legal information and EU compliance"
               },
               {
                 "tag": "H2",
@@ -1022,42 +911,42 @@
         },
         "visual": {
           "budgets": {
-            "fontFamilies": 1,
-            "colors": 1,
-            "fontSizes": 1
+            "fontFamilies": 2,
+            "colors": 8,
+            "fontSizes": 6
           },
           "counts": {
             "fontFamilies": 1,
             "colors": 6,
-            "fontSizes": 5
+            "fontSizes": 3
           },
           "tokens": {
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 60
+                "count": 68
               }
             ],
             "colors": [
               {
-                "value": "rgb(242, 242, 242)",
-                "count": 51
+                "value": "rgb(244, 248, 251)",
+                "count": 57
               },
               {
-                "value": "rgb(255, 255, 255)",
-                "count": 44
-              },
-              {
-                "value": "rgb(154, 154, 154)",
-                "count": 15
-              },
-              {
-                "value": "rgb(17, 17, 17)",
-                "count": 14
+                "value": "rgb(175, 192, 206)",
+                "count": 40
               },
               {
                 "value": "rgb(34, 211, 197)",
-                "count": 10
+                "count": 24
+              },
+              {
+                "value": "rgba(202, 214, 224, 0.18)",
+                "count": 15
+              },
+              {
+                "value": "rgba(16, 38, 63, 0.82)",
+                "count": 14
               },
               {
                 "value": "rgba(34, 211, 197, 0.08)",
@@ -1066,456 +955,16 @@
             ],
             "fontSizes": [
               {
-                "value": "18px",
-                "count": 38
+                "value": "17px",
+                "count": 46
               },
               {
-                "value": "20.7px",
-                "count": 12
+                "value": "19.125px",
+                "count": 13
               },
               {
-                "value": "15.75px",
-                "count": 8
-              },
-              {
-                "value": "36px",
-                "count": 1
-              },
-              {
-                "value": "17.1px",
-                "count": 1
-              }
-            ]
-          }
-        },
-        "appliesPrinciples": [
-          "site-footer",
-          "page-kind",
-          "visual-budget",
-          "heading-outline"
-        ],
-        "defects": []
-      },
-      "signals": {
-        "lang": "en",
-        "title": "Missing operator details — sales blocker",
-        "viewport": true,
-        "canonical": "",
-        "linkCount": 5,
-        "footerLinks": [
-          "/compare",
-          "/registry",
-          "/marketplace",
-          "/legal",
-          "/?action=contact"
-        ],
-        "navLinks": [],
-        "pageLinks": [
-          "/compare",
-          "/registry",
-          "/marketplace",
-          "/legal",
-          "/?action=contact"
-        ],
-        "buttonCount": 0,
-        "formCount": 0
-      },
-      "lenses": {
-        "kind": [],
-        "visual": [],
-        "structure": [],
-        "navigation": [],
-        "a11y": [],
-        "seo": [],
-        "consistency": [],
-        "ux": [],
-        "policy": [],
-        "modularity": []
-      }
-    },
-    {
-      "url": "http://127.0.0.1:8781/marketplace?lang=en",
-      "intentKind": "unknown",
-      "httpStatus": 200,
-      "page": {
-        "schema": "wellmanifest.gui/page/v1",
-        "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
-        "id": "observed/marketplace-lang=en",
-        "version": "1.4.0",
-        "title": "Partner marketplace",
-        "placement": {
-          "home": "subactor",
-          "shape": "runtime_service",
-          "adopt": "wellmanifest/gui",
-          "runtimeOwner": "subactor"
-        },
-        "page": {
-          "kind": "unknown",
-          "role": "public",
-          "source": "observed",
-          "url": "http://127.0.0.1:8781/marketplace?lang=en",
-          "family": "commerce"
-        },
-        "structure": {
-          "landmarks": {
-            "main": true,
-            "footer": true,
-            "h1": "Partner marketplace",
-            "form": false,
-            "article": false,
-            "listing": false,
-            "headingOutline": [
-              {
-                "tag": "H1",
-                "text": "Partner marketplace"
-              }
-            ]
-          },
-          "chrome": {
-            "itemSectionToolbar": false,
-            "itemViewSwitch": false,
-            "sectionAddButton": false,
-            "sectionViewToolbar": false,
-            "viewport": false,
-            "itemView": false,
-            "hamburger": false
-          }
-        },
-        "visual": {
-          "budgets": {
-            "fontFamilies": 1,
-            "colors": 1,
-            "fontSizes": 1
-          },
-          "counts": {
-            "fontFamilies": 2,
-            "colors": 5,
-            "fontSizes": 6
-          },
-          "tokens": {
-            "fontFamilies": [
-              {
-                "value": "Inter",
-                "count": 47
-              },
-              {
-                "value": "ui-monospace",
-                "count": 10
-              }
-            ],
-            "colors": [
-              {
-                "value": "rgb(242, 242, 242)",
-                "count": 41
-              },
-              {
-                "value": "rgb(34, 211, 197)",
-                "count": 38
-              },
-              {
-                "value": "rgb(255, 255, 255)",
-                "count": 31
-              },
-              {
-                "value": "rgb(154, 154, 154)",
-                "count": 4
-              },
-              {
-                "value": "rgb(17, 17, 17)",
-                "count": 2
-              }
-            ],
-            "fontSizes": [
-              {
-                "value": "17.1px",
-                "count": 24
-              },
-              {
-                "value": "18px",
-                "count": 14
-              },
-              {
-                "value": "14.4px",
+                "value": "14.875px",
                 "count": 9
-              },
-              {
-                "value": "15.75px",
-                "count": 8
-              },
-              {
-                "value": "36px",
-                "count": 1
-              },
-              {
-                "value": "14.76px",
-                "count": 1
-              }
-            ]
-          }
-        },
-        "appliesPrinciples": [
-          "site-footer",
-          "page-kind",
-          "visual-budget"
-        ],
-        "defects": []
-      },
-      "signals": {
-        "lang": "en",
-        "title": "Partner marketplace",
-        "viewport": true,
-        "canonical": "",
-        "linkCount": 10,
-        "footerLinks": [
-          "/compare",
-          "/registry",
-          "/marketplace",
-          "/legal",
-          "/?action=contact"
-        ],
-        "navLinks": [
-          "/?lang=en",
-          "/compare",
-          "/registry",
-          "/marketplace",
-          "/legal"
-        ],
-        "pageLinks": [
-          "/?lang=en",
-          "/compare",
-          "/registry",
-          "/marketplace",
-          "/legal",
-          "/compare",
-          "/registry",
-          "/marketplace",
-          "/legal",
-          "/?action=contact"
-        ],
-        "buttonCount": 0,
-        "formCount": 0
-      },
-      "lenses": {
-        "kind": [],
-        "visual": [],
-        "structure": [],
-        "navigation": [],
-        "a11y": [],
-        "seo": [],
-        "consistency": [],
-        "ux": [],
-        "policy": [],
-        "modularity": []
-      }
-    },
-    {
-      "url": "http://127.0.0.1:8781/?action=contact",
-      "intentKind": "unknown",
-      "httpStatus": 200,
-      "page": {
-        "schema": "wellmanifest.gui/page/v1",
-        "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
-        "id": "observed/-action=contact",
-        "version": "1.4.0",
-        "title": "Subactor — a platform for autonomizing business processes",
-        "placement": {
-          "home": "subactor",
-          "shape": "runtime_service",
-          "adopt": "wellmanifest/gui",
-          "runtimeOwner": "subactor"
-        },
-        "page": {
-          "kind": "unknown",
-          "role": "public",
-          "source": "observed",
-          "url": "http://127.0.0.1:8781/?action=contact&viewport=tablet&item_view=cards&lang=en&currency=EUR&theme=dark",
-          "family": "marketing"
-        },
-        "structure": {
-          "landmarks": {
-            "main": true,
-            "footer": true,
-            "h1": "Subactor is a platform for autonomizing business processes.",
-            "form": true,
-            "article": true,
-            "listing": false,
-            "headingOutline": [
-              {
-                "tag": "H1",
-                "text": "Subactor is a platform for autonomizing business processes."
-              },
-              {
-                "tag": "H2",
-                "text": "From an event to a verified outcome"
-              },
-              {
-                "tag": "H3",
-                "text": "Orders from several stores"
-              },
-              {
-                "tag": "H3",
-                "text": "Invoices without retyping"
-              },
-              {
-                "tag": "H3",
-                "text": "An outage noticed before customers"
-              },
-              {
-                "tag": "H3",
-                "text": "Simply connect the accounts used by your process"
-              },
-              {
-                "tag": "H2",
-                "text": "How many actions do your processes perform?"
-              },
-              {
-                "tag": "H3",
-                "text": "Basic"
-              },
-              {
-                "tag": "H3",
-                "text": "Pro"
-              },
-              {
-                "tag": "H3",
-                "text": "Max"
-              },
-              {
-                "tag": "H2",
-                "text": "On-Premise rollout"
-              },
-              {
-                "tag": "H2",
-                "text": "Four things we put in writing"
-              },
-              {
-                "tag": "H3",
-                "text": "No hidden costs"
-              },
-              {
-                "tag": "H3",
-                "text": "No lock-in"
-              },
-              {
-                "tag": "H3",
-                "text": "No card to start"
-              },
-              {
-                "tag": "H3",
-                "text": "VAT invoice in the plan currency"
-              }
-            ]
-          },
-          "chrome": {
-            "itemSectionToolbar": false,
-            "itemViewSwitch": false,
-            "sectionAddButton": false,
-            "sectionViewToolbar": false,
-            "viewport": true,
-            "itemView": true,
-            "hamburger": true
-          }
-        },
-        "visual": {
-          "budgets": {
-            "fontFamilies": 1,
-            "colors": 1,
-            "fontSizes": 1
-          },
-          "counts": {
-            "fontFamilies": 2,
-            "colors": 17,
-            "fontSizes": 3
-          },
-          "tokens": {
-            "fontFamilies": [
-              {
-                "value": "Inter",
-                "count": 940
-              },
-              {
-                "value": "Arial",
-                "count": 5
-              }
-            ],
-            "colors": [
-              {
-                "value": "rgb(255, 255, 255)",
-                "count": 466
-              },
-              {
-                "value": "rgb(110, 231, 183)",
-                "count": 375
-              },
-              {
-                "value": "rgb(242, 242, 242)",
-                "count": 372
-              },
-              {
-                "value": "rgb(92, 255, 228)",
-                "count": 299
-              },
-              {
-                "value": "rgb(208, 208, 208)",
-                "count": 202
-              },
-              {
-                "value": "rgb(154, 154, 154)",
-                "count": 85
-              },
-              {
-                "value": "rgb(6, 32, 30)",
-                "count": 40
-              },
-              {
-                "value": "rgb(156, 201, 239)",
-                "count": 34
-              },
-              {
-                "value": "rgb(22, 22, 22)",
-                "count": 33
-              },
-              {
-                "value": "rgb(17, 17, 17)",
-                "count": 22
-              },
-              {
-                "value": "rgb(252, 211, 77)",
-                "count": 16
-              },
-              {
-                "value": "rgba(92, 255, 228, 0.18)",
-                "count": 14
-              },
-              {
-                "value": "rgba(16, 185, 129, 0.15)",
-                "count": 11
-              },
-              {
-                "value": "rgb(0, 0, 0)",
-                "count": 5
-              },
-              {
-                "value": "rgba(59, 130, 246, 0.15)",
-                "count": 3
-              },
-              {
-                "value": "color(srgb 0 0 0 / 0.88)",
-                "count": 1
-              }
-            ],
-            "fontSizes": [
-              {
-                "value": "15.75px",
-                "count": 613
-              },
-              {
-                "value": "18px",
-                "count": 290
-              },
-              {
-                "value": "27px",
-                "count": 42
               }
             ]
           }
@@ -1530,38 +979,47 @@
       },
       "signals": {
         "lang": "en",
-        "title": "Subactor — a platform for autonomizing business processes",
+        "title": "Legal information and EU compliance",
         "viewport": true,
         "canonical": "",
-        "linkCount": 14,
+        "linkCount": 12,
         "footerLinks": [
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/marketplace?lang=en",
-          "/legal?lang=en",
-          "/?action=contact"
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/?lang=en"
         ],
         "navLinks": [
-          "/?action=landing"
-        ],
-        "pageLinks": [
-          "/?action=landing",
-          "#use-cases",
-          "#offers",
-          "#offer-saas-start",
-          "#offer-saas-business",
-          "#offer-prepaid-actions",
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/legal?lang=en",
-          "/compare?lang=en",
-          "/registry?lang=en",
-          "/marketplace?lang=en",
-          "/legal?lang=en",
+          "/?lang=en",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
           "/?action=contact"
         ],
-        "buttonCount": 10,
-        "formCount": 1
+        "pageLinks": [
+          "/?lang=en",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
+          "/?lang=en"
+        ],
+        "buttonCount": 0,
+        "formCount": 0
       },
       "lenses": {
         "kind": [],
@@ -1582,7 +1040,21 @@
       "code": "WEB-LLM-001",
       "severity": "error",
       "lens": "ux",
-      "message": "WEB-LLM-001: all SubLLM candidates failed: cursor: cursor-sdk not installed | cursor: cursor-sdk not installed | zai/glm-5.2: The read operation timed out | openrouter/glm-5.2: LLM output is not wellmanifest.webpage/llm-judgment/v1 | openrouter/grok-4.5: LLM output is not wellmanifest.webpage/llm-judgment/v1 | openrouter/gemini-3.6-flash: LLM output is not wellmanifest.webpage/llm-judgment/v1"
+      "message": "LLM judgment skipped (--skip-llm)"
+    },
+    {
+      "code": "GUI-VIS-COLOR-001",
+      "severity": "warn",
+      "message": "17 unique colors (budget 16)",
+      "lens": "visual",
+      "url": "http://127.0.0.1:8789/"
+    },
+    {
+      "code": "GUI-VIS-TYPE-001",
+      "severity": "warn",
+      "message": "17 font sizes (budget 8)",
+      "lens": "visual",
+      "url": "http://127.0.0.1:8789/"
     }
   ],
   "hints": []

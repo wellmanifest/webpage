@@ -13,12 +13,16 @@ root = Path(".")
 version = (root / "VERSION").read_text().strip()
 standard = json.loads((root / "standard/webpage.standard.v1.json").read_text())
 schema = json.loads((root / "schemas/webpage-site-audit.schema.json").read_text())
-assert version == "0.2.0"
+assert version == "0.2.1"
 assert standard["subllm"] == {"application": "platform", "function": "site-audit", "home": "subactor/subllm"}
 assert "requiredPublicPaths" not in standard
 audit_src = (root / "scripts/audit_site.py").read_text()
 assert "INTENT_BY_PATH" not in audit_src
 assert "subllm_judge" in audit_src
+assert "/home/tom/" not in audit_src
+assert 'page["page"]["kind"] = "unknown"' not in audit_src
+assert "WEB-SITEMAP-001" in audit_src
+assert "infer_kind" in (root / "scripts/audit_site.py").read_text() or "defects_for_page" in audit_src
 assert standard["placement"]["home"] == "wellmanifest"
 assert standard["placement"]["shape"] == "domain_pack"
 assert standard["authority"] == "propose-only"

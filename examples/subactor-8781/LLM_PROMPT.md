@@ -8,7 +8,21 @@ Kontynuuj z tym werdyktem. Z findings zrób listę ticketów (jeden lens = jeden
       "code": "WEB-LLM-001",
       "severity": "error",
       "lens": "ux",
-      "message": "WEB-LLM-001: all SubLLM candidates failed: cursor: cursor-sdk not installed | cursor: cursor-sdk not installed | zai/glm-5.2: The read operation timed out | openrouter/glm-5.2: LLM output is not wellmanifest.webpage/llm-judgment/v1 | openrouter/grok-4.5: LLM output is not wellmanifest.webpage/llm-judgment/v1 | openrouter/gemini-3.6-flash: LLM output is not wellmanifest.webpage/llm-judgment/v1"
+      "message": "LLM judgment skipped (--skip-llm)"
+    },
+    {
+      "code": "GUI-VIS-COLOR-001",
+      "severity": "warn",
+      "message": "17 unique colors (budget 16)",
+      "lens": "visual",
+      "url": "http://127.0.0.1:8789/"
+    },
+    {
+      "code": "GUI-VIS-TYPE-001",
+      "severity": "warn",
+      "message": "17 font sizes (budget 8)",
+      "lens": "visual",
+      "url": "http://127.0.0.1:8789/"
     }
   ],
   "hints": [],
