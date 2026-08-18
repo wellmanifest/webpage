@@ -56,6 +56,30 @@ def test_article_kind_without_article_landmark() -> None:
     assert item["lenses"]["structure"][0]["code"] == "GUI-VIS-STRUCT-005"
 
 
+def test_article_heading_outline_without_h2() -> None:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from audit_site import observation_page
+
+    raw = {
+        "title": "Compare",
+        "structure": {
+            "landmarks": {
+                "main": True,
+                "footer": True,
+                "h1": "Compare",
+                "form": False,
+                "article": True,
+                "listing": True,
+                "headingOutline": [{"tag": "H1", "text": "Compare"}],
+            },
+            "chrome": {},
+        },
+        "tokens": {"fontFamilyCount": 1, "colorCount": 4, "fontSizeCount": 3, "fontFamilies": [], "colors": [], "fontSizes": []},
+    }
+    item = observation_page("http://127.0.0.1:8789/compare", raw, {"title": "Compare"})
+    assert any(d["code"] == "GUI-VIS-STRUCT-006" for d in item["page"]["defects"])
+
+
 def test_contact_url_with_form_is_form_despite_long_outline() -> None:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
     from audit_site import observation_page

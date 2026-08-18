@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -280,6 +280,10 @@
               {
                 "tag": "H1",
                 "text": "Subactor obok innych platform"
+              },
+              {
+                "tag": "H2",
+                "text": "Zestawienie"
               }
             ]
           },
@@ -308,7 +312,7 @@
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 71
+                "count": 72
               }
             ],
             "colors": [
@@ -322,7 +326,7 @@
               },
               {
                 "value": "rgb(244, 248, 251)",
-                "count": 38
+                "count": 40
               },
               {
                 "value": "rgb(183, 247, 92)",
@@ -348,7 +352,7 @@
               },
               {
                 "value": "19.125px",
-                "count": 1
+                "count": 2
               }
             ]
           }
