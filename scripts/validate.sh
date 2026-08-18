@@ -13,7 +13,7 @@ root = Path(".")
 version = (root / "VERSION").read_text().strip()
 standard = json.loads((root / "standard/webpage.standard.v1.json").read_text())
 schema = json.loads((root / "schemas/webpage-site-audit.schema.json").read_text())
-assert version == "0.2.5"
+assert version == "0.2.6"
 assert standard["subllm"] == {"application": "platform", "function": "site-audit", "home": "subactor/subllm"}
 assert "requiredPublicPaths" not in standard
 audit_src = (root / "scripts/audit_site.py").read_text()
@@ -29,6 +29,8 @@ assert "advertised_contact_targets" in audit_src
 assert "mkdtemp" in audit_src
 assert 'WEB-LLM-001", "warn"' in audit_src
 assert "WEB-NAV-001" in audit_src
+assert "WEB-NAV-002" in audit_src
+assert "closest(\"footer, .footer\")" in audit_src or "closest('footer, .footer')" in audit_src
 assert "WEB-CONS-001" in audit_src
 assert "WEB-CONS-002" in audit_src
 assert "/home/tom/" not in (root / "scripts/subllm_judge.py").read_text()

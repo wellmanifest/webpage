@@ -58,6 +58,7 @@ LENS_JS = r"""
     footerLinks: Array.from(document.querySelectorAll("footer a[href], .footer a[href]"))
       .map((a) => a.getAttribute("href") || ""),
     navLinks: Array.from(document.querySelectorAll("header a[href], nav a[href], .nav a[href]"))
+      .filter((a) => !a.closest("footer, .footer"))
       .map((a) => a.getAttribute("href") || ""),
     pageLinks: hrefs,
     buttonCount: document.querySelectorAll("button, [role=button], input[type=submit]").length,
@@ -263,13 +264,21 @@ def _norm_site_href(href: str, base: str) -> str:
     return f"{path}?action={action}" if action else path
 
 
-def _footer_keyset(item: dict[str, Any], base: str) -> frozenset[str]:
+def _href_keyset(item: dict[str, Any], base: str, key: str) -> frozenset[str]:
     sig = item.get("signals") or {}
     return frozenset(
         _norm_site_href(str(href), base)
-        for href in (sig.get("footerLinks") or [])
+        for href in (sig.get(key) or [])
         if href
     )
+
+
+def _footer_keyset(item: dict[str, Any], base: str) -> frozenset[str]:
+    return _href_keyset(item, base, "footerLinks")
+
+
+def _nav_keyset(item: dict[str, Any], base: str) -> frozenset[str]:
+    return _href_keyset(item, base, "navLinks")
 
 
 def _page_family(item: dict[str, Any]) -> str:
@@ -348,6 +357,14 @@ def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "warn",
                 "navigation",
                 "Footer link sets differ across pages",
+            ))
+        nav_sets = {_nav_keyset(item, base) for item in pages if _nav_keyset(item, base)}
+        if len(nav_sets) > 1:
+            out.append(finding(
+                "WEB-NAV-002",
+                "warn",
+                "navigation",
+                "Header nav link sets differ across pages",
             ))
 
         by_family: dict[str, list[dict[str, Any]]] = {}

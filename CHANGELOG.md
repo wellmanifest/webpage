@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.6] - 2026-08-18
+### Added
+- Deterministic `WEB-NAV-002` (header nav link-set drift). `navLinks` ignore
+  anchors inside `footer` so a footer `<nav>` is not counted twice.
+
 ## [0.2.5] - 2026-08-18
 ### Added
 - Deterministic `WEB-NAV-001` (footer link-set drift) and same-family

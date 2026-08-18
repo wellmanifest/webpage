@@ -157,7 +157,7 @@ def test_observation_findings_flag_footer_and_family_drift() -> None:
                 "viewport": True,
                 "formCount": 0,
                 "footerLinks": ["/compare", "/legal"],
-                "navLinks": [],
+                "navLinks": ["/compare", "/legal"],
             },
             "lenses": {},
         },
@@ -176,13 +176,14 @@ def test_observation_findings_flag_footer_and_family_drift() -> None:
                 "viewport": True,
                 "formCount": 0,
                 "footerLinks": ["/compare", "/legal", "/"],
-                "navLinks": [],
+                "navLinks": ["/compare", "/legal", "/"],
             },
             "lenses": {},
         },
     ]
     codes = {row["code"] for row in observation_findings(pages)}
     assert "WEB-NAV-001" in codes
+    assert "WEB-NAV-002" in codes
     assert "WEB-CONS-001" in codes
     assert "WEB-CONS-002" in codes
 

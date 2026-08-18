@@ -27,7 +27,8 @@ This pack does not hardcode product paths.
 2. Kind / contact path (`WEB-UX-001`) — footer/nav advertises contact, and
    the followed page still has no form. Sitemap may omit that URL; the
    auditor still opens the advertised href.
-3. One shared footer (`WEB-NAV-001`).
+3. One shared footer (`WEB-NAV-001`) and one shared header nav (`WEB-NAV-002`).
+   Header signals do not include footer `<nav>` links.
 4. Visual budgets (`GUI-VIS-*`) — still not a second brand kit.
 5. Cross-page color/font/lang drift (`WEB-CONS-*`).
 6. Missing `rel=canonical` (`WEB-SEO-001`).
