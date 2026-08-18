@@ -2,7 +2,7 @@
   "schema": "wellmanifest.webpage/site-audit/v1",
   "$schema": "https://wellmanifest.com/schemas/webpage/site-audit/v1",
   "id": "subactor.www/site-audit",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "title": "sub.actor site audit (http://127.0.0.1:8789/)",
   "placement": {
     "home": "subactor",
@@ -197,7 +197,7 @@
         "lang": "pl",
         "title": "Subactor — platforma autonomizacji procesów biznesowych",
         "viewport": true,
-        "canonical": "",
+        "canonical": "http://127.0.0.1:8789/",
         "linkCount": 10,
         "footerLinks": [
           "/compare",
@@ -250,7 +250,7 @@
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
         "id": "observed/compare",
         "version": "1.4.0",
-        "title": "Subactor next to other platforms",
+        "title": "Subactor obok innych platform",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -268,14 +268,14 @@
           "landmarks": {
             "main": true,
             "footer": true,
-            "h1": "Subactor next to other platforms",
+            "h1": "Subactor obok innych platform",
             "form": false,
             "article": false,
             "listing": false,
             "headingOutline": [
               {
                 "tag": "H1",
-                "text": "Subactor next to other platforms"
+                "text": "Subactor obok innych platform"
               }
             ]
           },
@@ -358,10 +358,10 @@
         "defects": []
       },
       "signals": {
-        "lang": "en",
-        "title": "Subactor next to other platforms",
+        "lang": "pl",
+        "title": "Subactor obok innych platform",
         "viewport": true,
-        "canonical": "",
+        "canonical": "http://127.0.0.1:8789/compare",
         "linkCount": 12,
         "footerLinks": [
           "/compare",
@@ -369,10 +369,10 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "navLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -385,7 +385,7 @@
           "/?action=contact"
         ],
         "pageLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -396,7 +396,7 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "buttonCount": 0,
         "formCount": 0
@@ -423,7 +423,7 @@
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
         "id": "observed/registry",
         "version": "1.4.0",
-        "title": "Current registries",
+        "title": "Aktualne rejestry",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -441,14 +441,14 @@
           "landmarks": {
             "main": true,
             "footer": true,
-            "h1": "Current registries",
+            "h1": "Aktualne rejestry",
             "form": false,
             "article": false,
             "listing": false,
             "headingOutline": [
               {
                 "tag": "H1",
-                "text": "Current registries"
+                "text": "Aktualne rejestry"
               }
             ]
           },
@@ -526,10 +526,10 @@
         "defects": []
       },
       "signals": {
-        "lang": "en",
-        "title": "Current registries",
+        "lang": "pl",
+        "title": "Aktualne rejestry",
         "viewport": true,
-        "canonical": "",
+        "canonical": "http://127.0.0.1:8789/registry",
         "linkCount": 12,
         "footerLinks": [
           "/compare",
@@ -537,10 +537,10 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "navLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -553,7 +553,7 @@
           "/?action=contact"
         ],
         "pageLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -564,7 +564,7 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "buttonCount": 0,
         "formCount": 0
@@ -591,7 +591,7 @@
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
         "id": "observed/marketplace",
         "version": "1.4.0",
-        "title": "Partner marketplace",
+        "title": "Marketplace partnerów",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -609,14 +609,14 @@
           "landmarks": {
             "main": true,
             "footer": true,
-            "h1": "Partner marketplace",
+            "h1": "Marketplace partnerów",
             "form": false,
             "article": false,
             "listing": false,
             "headingOutline": [
               {
                 "tag": "H1",
-                "text": "Partner marketplace"
+                "text": "Marketplace partnerów"
               }
             ]
           },
@@ -694,10 +694,10 @@
         "defects": []
       },
       "signals": {
-        "lang": "en",
-        "title": "Partner marketplace",
+        "lang": "pl",
+        "title": "Marketplace partnerów",
         "viewport": true,
-        "canonical": "",
+        "canonical": "http://127.0.0.1:8789/marketplace",
         "linkCount": 12,
         "footerLinks": [
           "/compare",
@@ -705,10 +705,10 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "navLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -721,7 +721,7 @@
           "/?action=contact"
         ],
         "pageLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -732,7 +732,7 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "buttonCount": 0,
         "formCount": 0
@@ -759,7 +759,7 @@
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
         "id": "observed/legal",
         "version": "1.4.0",
-        "title": "Legal information and EU compliance",
+        "title": "Informacje prawne i zgodność UE",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -777,62 +777,62 @@
           "landmarks": {
             "main": true,
             "footer": true,
-            "h1": "Legal information and EU compliance",
+            "h1": "Informacje prawne i zgodność UE",
             "form": false,
             "article": false,
             "listing": false,
             "headingOutline": [
               {
                 "tag": "H1",
-                "text": "Legal information and EU compliance"
+                "text": "Informacje prawne i zgodność UE"
               },
               {
                 "tag": "H2",
-                "text": "You are creating a business account, not placing a paid order."
+                "text": "Tworzysz konto firmowe, a nie płatne zamówienie."
               },
               {
                 "tag": "H2",
-                "text": "B2B offer only"
+                "text": "Oferta wyłącznie B2B"
               },
               {
                 "tag": "H2",
-                "text": "Price, VAT and payment"
+                "text": "Cena, VAT i płatność"
               },
               {
                 "tag": "H2",
-                "text": "Contract, term and cancellation"
+                "text": "Umowa, okres i rezygnacja"
               },
               {
                 "tag": "H2",
-                "text": "Functions and technical requirements"
+                "text": "Funkcje i wymagania techniczne"
               },
               {
                 "tag": "H2",
-                "text": "GDPR, data and party roles"
+                "text": "RODO, dane i role stron"
               },
               {
                 "tag": "H2",
-                "text": "Export and provider switching"
+                "text": "Eksport i zmiana dostawcy"
               },
               {
                 "tag": "H2",
-                "text": "AI and human oversight"
+                "text": "AI i nadzór człowieka"
               },
               {
                 "tag": "H2",
-                "text": "Digital accessibility"
+                "text": "Dostępność cyfrowa"
               },
               {
                 "tag": "H2",
-                "text": "Contact and complaints"
+                "text": "Kontakt i reklamacje"
               },
               {
                 "tag": "H2",
-                "text": "Missing operator details — sales blocker"
+                "text": "Brakujące dane operatora — blokada sprzedaży"
               },
               {
                 "tag": "H2",
-                "text": "Official legal sources"
+                "text": "Oficjalne podstawy prawne"
               }
             ]
           },
@@ -915,10 +915,10 @@
         "defects": []
       },
       "signals": {
-        "lang": "en",
-        "title": "Legal information and EU compliance",
+        "lang": "pl",
+        "title": "Informacje prawne i zgodność UE",
         "viewport": true,
-        "canonical": "",
+        "canonical": "http://127.0.0.1:8789/legal",
         "linkCount": 12,
         "footerLinks": [
           "/compare",
@@ -926,10 +926,10 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "navLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -942,7 +942,7 @@
           "/?action=contact"
         ],
         "pageLinks": [
-          "/?lang=en",
+          "/",
           "/compare",
           "/registry",
           "/marketplace",
@@ -953,7 +953,7 @@
           "/marketplace",
           "/legal",
           "/?action=contact",
-          "/?lang=en"
+          "/"
         ],
         "buttonCount": 0,
         "formCount": 0
@@ -973,6 +973,13 @@
     }
   ],
   "findings": [
+    {
+      "code": "WEB-UX-001",
+      "severity": "error",
+      "lens": "ux",
+      "message": "Contact path /?action=contact has no form (advertised in nav/footer)",
+      "url": "/?action=contact"
+    },
     {
       "code": "WEB-LLM-001",
       "severity": "error",

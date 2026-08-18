@@ -9,16 +9,14 @@ Soczewki są niezależne od typu strony. Najpierw kind, potem landmarks, potem b
 
 ## Findings
 
+- `WEB-UX-001` [error/ux] Contact path /?action=contact has no form (advertised in nav/footer)
 - `WEB-LLM-001` [error/ux] LLM judgment skipped (--skip-llm)
-- `GUI-VIS-COLOR-001` [warn/visual] 17 unique colors (budget 16)
-- `GUI-VIS-TYPE-001` [warn/visual] 17 font sizes (budget 8)
 
 ## Strony
 
 ### http://127.0.0.1:8789/
-kind **landing** (intent landing) · fonty 3 · kolory 17 · rozmiary 17
-- `GUI-VIS-COLOR-001` 17 unique colors (budget 16)
-- `GUI-VIS-TYPE-001` 17 font sizes (budget 8)
+kind **landing** (intent landing) · fonty 1 · kolory 10 · rozmiary 5
+- brak defektów soczewek
 
 ### http://127.0.0.1:8789/compare
 kind **article** (intent article) · fonty 1 · kolory 6 · rozmiary 3

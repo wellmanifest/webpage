@@ -23,10 +23,11 @@ not by a path table in this pack.
 ## Order of work
 
 1. Sitemap + robots (`WEB-SITEMAP-001`, `WEB-ROBOTS-001`).
-2. Kind / contact path (`WEB-UX-001`).
+2. Kind / contact path (`WEB-UX-001`) — footer/nav advertises contact, no form.
 3. One shared footer (`WEB-NAV-001`).
 4. Visual budgets (`GUI-VIS-*`) — still not a second brand kit.
-5. Cross-page color/font drift (`WEB-CONS-*`).
+5. Cross-page color/font/lang drift (`WEB-CONS-*`).
+6. Missing `rel=canonical` (`WEB-SEO-001`).
 
 ## Generated report
 

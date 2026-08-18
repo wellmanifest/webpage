@@ -5,24 +5,17 @@ Kontynuuj z tym werdyktem. Z findings zrób listę ticketów (jeden lens = jeden
   "schema": "wellmanifest.webpage/site-audit/v1",
   "findings": [
     {
+      "code": "WEB-UX-001",
+      "severity": "error",
+      "lens": "ux",
+      "message": "Contact path /?action=contact has no form (advertised in nav/footer)",
+      "url": "/?action=contact"
+    },
+    {
       "code": "WEB-LLM-001",
       "severity": "error",
       "lens": "ux",
       "message": "LLM judgment skipped (--skip-llm)"
-    },
-    {
-      "code": "GUI-VIS-COLOR-001",
-      "severity": "warn",
-      "message": "17 unique colors (budget 16)",
-      "lens": "visual",
-      "url": "http://127.0.0.1:8789/"
-    },
-    {
-      "code": "GUI-VIS-TYPE-001",
-      "severity": "warn",
-      "message": "17 font sizes (budget 8)",
-      "lens": "visual",
-      "url": "http://127.0.0.1:8789/"
     }
   ],
   "hints": [],

@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] - 2026-08-18
+### Added
+- Deterministic `WEB-SEO-001` (canonical), `WEB-UX-001` (contact without a form),
+  `WEB-CONS-003` (html lang drift), and `WEB-A11Y-*` from observed signals.
+  These do not wait for SubLLM and do not hardcode product paths.
+
 ## [0.2.1] - 2026-08-18
 ### Fixed
 - Keep `wellmanifest/gui` `infer_kind` and profile budgets when SubLLM fails.

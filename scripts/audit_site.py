@@ -8,9 +8,11 @@ import asyncio
 import json
 import os
 import re
+import shutil
 import socket
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.parse
 import urllib.request
@@ -216,6 +218,80 @@ def policy_findings(url: str) -> list[dict[str, Any]]:
     return []
 
 
+CONTACT_HREF_RE = re.compile(
+    r"(?:^|[?&])action=contact(?:&|$)|(?:^|/)contact(?:/|\?|$)",
+    re.I,
+)
+
+
+def looks_like_contact_href(href: str) -> bool:
+    return bool(CONTACT_HREF_RE.search(href or ""))
+
+
+def observation_findings(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Deterministic lenses from observed signals. No product path table."""
+    out: list[dict[str, Any]] = []
+    langs: set[str] = set()
+    contact_hrefs: set[str] = set()
+    for item in pages:
+        url = str(item.get("url") or "")
+        sig = item.get("signals") or {}
+        lenses = item.setdefault("lenses", {})
+        lang = str(sig.get("lang") or "").strip()
+        if lang:
+            langs.add(lang)
+        if not sig.get("canonical"):
+            row = finding("WEB-SEO-001", "warn", "seo", "Missing rel=canonical", url)
+            lenses.setdefault("seo", []).append(row)
+            out.append(row)
+        if not lang:
+            row = finding("WEB-A11Y-001", "warn", "a11y", "html lang is empty", url)
+            lenses.setdefault("a11y", []).append(row)
+            out.append(row)
+        if sig.get("viewport") is False:
+            row = finding("WEB-A11Y-002", "warn", "a11y", "viewport meta missing", url)
+            lenses.setdefault("a11y", []).append(row)
+            out.append(row)
+        for href in list(sig.get("footerLinks") or []) + list(sig.get("navLinks") or []):
+            if looks_like_contact_href(str(href)):
+                contact_hrefs.add(str(href))
+
+    if len(langs) > 1:
+        out.append(finding(
+            "WEB-CONS-003",
+            "warn",
+            "consistency",
+            "html lang differs across pages: " + ", ".join(sorted(langs)),
+        ))
+
+    for href in sorted(contact_hrefs):
+        target = urllib.parse.urljoin(str(pages[0].get("url") or "/"), href) if pages else href
+        matched = next(
+            (
+                item
+                for item in pages
+                if urllib.parse.urldefrag(str(item.get("url") or ""))[0].rstrip("/")
+                == urllib.parse.urldefrag(target)[0].rstrip("/")
+                or href in str(item.get("url") or "")
+            ),
+            None,
+        )
+        form_count = int((matched.get("signals") or {}).get("formCount") or 0) if matched else 0
+        if matched is not None and form_count > 0:
+            continue
+        row = finding(
+            "WEB-UX-001",
+            "error",
+            "ux",
+            f"Contact path {href} has no form (advertised in nav/footer)",
+            href,
+        )
+        out.append(row)
+        if matched is not None:
+            matched.setdefault("lenses", {}).setdefault("ux", []).append(row)
+    return out
+
+
 def apply_judgment(pages: list[dict[str, Any]], judgment: dict[str, Any]) -> None:
     by_url = {item["url"]: item for item in pages}
     for judged in judgment.get("pages") or []:
@@ -351,8 +427,7 @@ def proposed_sitemap(base: str, paths: list[str]) -> str:
 
 def probe_urls(urls: list[str], page_js: str, chrome_bin: str) -> list[dict[str, Any]]:
     port = free_port()
-    user_dir = Path("/tmp/wellmanifest-webpage-audit-chrome")
-    user_dir.mkdir(parents=True, exist_ok=True)
+    user_dir = Path(tempfile.mkdtemp(prefix="webpage-audit-chrome-"))
     chrome = subprocess.Popen(
         [
             chrome_bin, "--headless=new", "--disable-gpu", "--no-sandbox",
@@ -383,6 +458,7 @@ def probe_urls(urls: list[str], page_js: str, chrome_bin: str) -> list[dict[str,
             chrome.wait(timeout=5)
         except subprocess.TimeoutExpired:
             chrome.kill()
+        shutil.rmtree(user_dir, ignore_errors=True)
     return pages
 
 
@@ -454,6 +530,7 @@ def main() -> int:
         ))
     for item in pages:
         findings.extend(policy_findings(item["url"]))
+    findings.extend(observation_findings(pages))
 
     subllm_meta = {"application": "platform", "function": "site-audit", "provider": "", "model": ""}
     hints: list[str] = []
