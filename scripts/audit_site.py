@@ -509,6 +509,12 @@ def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]
         pages[0] if pages else None,
     )
     home_title = _norm_hint_text(_page_title(home)) if home else ""
+    home_h1 = _norm_hint_text(
+        str((((home.get("page") or {}).get("structure") or {}).get("landmarks") or {}).get("h1") or "")
+    ) if home else ""
+    if not home_h1 and home:
+        pairs = _heading_pairs(home)
+        home_h1 = next((_norm_hint_text(text) for tag, text in pairs if tag.upper() == "H1" and text.strip()), "")
     form_titles = [
         _norm_hint_text(_page_title(item))
         for item in pages
@@ -538,6 +544,17 @@ def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]
             flags=re.I,
         )
         if proposed and any(_norm_hint_text(value) in titles for value in proposed):
+            continue
+        quoted_titles = [_norm_hint_text(value) for value in re.findall(r"['\"]([^'\"]{12,})['\"]", text)]
+        if (
+            quoted_titles
+            and ("title" in folded or "seo-title" in folded)
+            and all(value not in titles for value in quoted_titles)
+        ):
+            continue
+        if home_h1 and home_h1 in home_title and (
+            "seo-title-002" in folded or "brand-generic" in folded
+        ):
             continue
         if contact_distinct and (
             "identical to home" in folded

@@ -434,6 +434,15 @@ def test_drop_stale_hints_keeps_unresolved_and_drops_closed() -> None:
         "pages[/legal].structure: Add in-page table of contents.",
         "SEO-TITLE-002: Home title is brand-generic while H1 is package-specific.",
     ]
+    pages[0]["signals"]["title"] = "Wybierz pakiet dla swojej organizacji | Subactor"
+    pages[0]["page"]["title"] = pages[0]["signals"]["title"]
+    aligned = drop_stale_hints(pages, [
+        "SEO-TITLE-002: Page title 'Subactor — platforma autonomizacji procesów biznesowych' is brand-generic while H1 is package-specific.",
+        "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
+    ])
+    assert aligned == [
+        "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
+    ]
 
 
 def test_apply_judgment_keeps_observed_kind_and_budgets() -> None:

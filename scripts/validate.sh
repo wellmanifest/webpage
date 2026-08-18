@@ -13,7 +13,7 @@ root = Path(".")
 version = (root / "VERSION").read_text().strip()
 standard = json.loads((root / "standard/webpage.standard.v1.json").read_text())
 schema = json.loads((root / "schemas/webpage-site-audit.schema.json").read_text())
-assert version == "0.2.12"
+assert version == "0.2.13"
 assert standard["subllm"] == {"application": "platform", "function": "site-audit", "home": "subactor/subllm"}
 assert "requiredPublicPaths" not in standard
 audit_src = (root / "scripts/audit_site.py").read_text()

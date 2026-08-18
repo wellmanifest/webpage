@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.13] - 2026-08-19
+### Fixed
+- Drop title hints that quote a document title no longer observed, or that
+  call a landing title brand-generic after it already contains the H1.
+  Does not invent `WEB-SEO-002`.
+
 ## [0.2.12] - 2026-08-19
 ### Added
 - Deterministic `WEB-NAV-003`: an `article` with eight or more H2s and
