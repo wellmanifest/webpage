@@ -108,29 +108,21 @@
             "fontSizes": 8
           },
           "counts": {
-            "fontFamilies": 3,
-            "colors": 17,
-            "fontSizes": 17
+            "fontFamilies": 1,
+            "colors": 10,
+            "fontSizes": 5
           },
           "tokens": {
             "fontFamilies": [
               {
                 "value": "Inter",
-                "count": 224
-              },
-              {
-                "value": "ui-monospace",
-                "count": 41
-              },
-              {
-                "value": "Arial",
-                "count": 14
+                "count": 285
               }
             ],
             "colors": [
               {
                 "value": "rgb(244, 248, 251)",
-                "count": 288
+                "count": 290
               },
               {
                 "value": "rgb(175, 192, 206)",
@@ -138,23 +130,19 @@
               },
               {
                 "value": "rgb(183, 247, 92)",
-                "count": 62
+                "count": 65
+              },
+              {
+                "value": "rgb(34, 211, 197)",
+                "count": 37
               },
               {
                 "value": "rgba(202, 214, 224, 0.18)",
                 "count": 21
               },
               {
-                "value": "rgb(34, 211, 197)",
-                "count": 16
-              },
-              {
                 "value": "rgba(16, 38, 63, 0.82)",
-                "count": 13
-              },
-              {
-                "value": "rgb(0, 0, 238)",
-                "count": 10
+                "count": 17
               },
               {
                 "value": "rgb(7, 17, 31)",
@@ -166,72 +154,32 @@
               },
               {
                 "value": "rgba(183, 247, 92, 0.15)",
-                "count": 3
-              },
-              {
-                "value": "rgba(183, 247, 92, 0.3)",
-                "count": 3
-              },
-              {
-                "value": "rgba(255, 255, 255, 0.02)",
-                "count": 2
-              },
-              {
-                "value": "rgba(183, 247, 92, 0.2)",
-                "count": 1
+                "count": 4
               },
               {
                 "value": "rgba(34, 211, 197, 0.15)",
-                "count": 1
-              },
-              {
-                "value": "rgba(34, 211, 197, 0.3)",
-                "count": 1
-              },
-              {
-                "value": "rgba(7, 17, 31, 0.65)",
                 "count": 1
               }
             ],
             "fontSizes": [
               {
-                "value": "16px",
-                "count": 87
+                "value": "14.875px",
+                "count": 150
               },
               {
-                "value": "15.2px",
-                "count": 62
+                "value": "17px",
+                "count": 106
               },
               {
-                "value": "12px",
-                "count": 35
-              },
-              {
-                "value": "14px",
-                "count": 19
-              },
-              {
-                "value": "12.8px",
-                "count": 18
-              },
-              {
-                "value": "14.4px",
+                "value": "25.5px",
                 "count": 15
               },
               {
-                "value": "13.6px",
-                "count": 9
+                "value": "19.125px",
+                "count": 10
               },
               {
-                "value": "22.4px",
-                "count": 7
-              },
-              {
-                "value": "19.5px",
-                "count": 5
-              },
-              {
-                "value": "25.6px",
+                "value": "38.25px",
                 "count": 4
               }
             ]
@@ -243,25 +191,14 @@
           "visual-budget",
           "heading-outline"
         ],
-        "defects": [
-          {
-            "code": "GUI-VIS-COLOR-001",
-            "severity": "warn",
-            "message": "17 unique colors (budget 16)"
-          },
-          {
-            "code": "GUI-VIS-TYPE-001",
-            "severity": "warn",
-            "message": "17 font sizes (budget 8)"
-          }
-        ]
+        "defects": []
       },
       "signals": {
         "lang": "pl",
         "title": "Subactor — platforma autonomizacji procesów biznesowych",
         "viewport": true,
         "canonical": "",
-        "linkCount": 5,
+        "linkCount": 10,
         "footerLinks": [
           "/compare",
           "/registry",
@@ -269,8 +206,19 @@
           "/legal",
           "/?action=contact"
         ],
-        "navLinks": [],
+        "navLinks": [
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact"
+        ],
         "pageLinks": [
+          "/compare",
+          "/registry",
+          "/marketplace",
+          "/legal",
+          "/?action=contact",
           "/compare",
           "/registry",
           "/marketplace",
@@ -282,18 +230,7 @@
       },
       "lenses": {
         "kind": [],
-        "visual": [
-          {
-            "code": "GUI-VIS-COLOR-001",
-            "severity": "warn",
-            "message": "17 unique colors (budget 16)"
-          },
-          {
-            "code": "GUI-VIS-TYPE-001",
-            "severity": "warn",
-            "message": "17 font sizes (budget 8)"
-          }
-        ],
+        "visual": [],
         "structure": [],
         "navigation": [],
         "a11y": [],
@@ -1041,20 +978,6 @@
       "severity": "error",
       "lens": "ux",
       "message": "LLM judgment skipped (--skip-llm)"
-    },
-    {
-      "code": "GUI-VIS-COLOR-001",
-      "severity": "warn",
-      "message": "17 unique colors (budget 16)",
-      "lens": "visual",
-      "url": "http://127.0.0.1:8789/"
-    },
-    {
-      "code": "GUI-VIS-TYPE-001",
-      "severity": "warn",
-      "message": "17 font sizes (budget 8)",
-      "lens": "visual",
-      "url": "http://127.0.0.1:8789/"
     }
   ],
   "hints": []
