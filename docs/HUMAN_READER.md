@@ -14,8 +14,11 @@ If `intentKind` ≠ `kind`, stop. Do not argue about fonts. The user opened the
 wrong surface. Kind and intent come from `wellmanifest/gui` `infer_kind`
 (URL + DOM + headings). SubLLM (`platform/site-audit`) may override them
 only when it emits a valid kind enum. Invented finding ids become hints. Hints that contradict measured titles,
-headings, or GUI budgets are dropped. Leftover unofficial hints are not
-tickets. This pack does not hardcode product paths.
+headings, or GUI budgets are dropped. After `WEB-UX-001` is closed
+(advertised contact href has a form), unofficial isolate-contact /
+dedicated-`/contact` hints are dropped too. Official UX does not require
+a standalone `/contact`. Leftover unofficial hints are not tickets. This
+pack does not hardcode product paths.
 
 ## Severity
 

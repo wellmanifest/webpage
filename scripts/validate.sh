@@ -13,7 +13,7 @@ root = Path(".")
 version = (root / "VERSION").read_text().strip()
 standard = json.loads((root / "standard/webpage.standard.v1.json").read_text())
 schema = json.loads((root / "schemas/webpage-site-audit.schema.json").read_text())
-assert version == "0.2.13"
+assert version == "0.2.14"
 assert standard["subllm"] == {"application": "platform", "function": "site-audit", "home": "subactor/subllm"}
 assert "requiredPublicPaths" not in standard
 audit_src = (root / "scripts/audit_site.py").read_text()
@@ -27,6 +27,8 @@ assert "WEB-UX-001" in audit_src
 assert "WEB-UX-002" in audit_src
 assert "observation_findings" in audit_src
 assert "drop_stale_hints" in audit_src
+assert "official_contact_ux_closed" in audit_src
+assert "_isolate_contact_hint" in audit_src
 assert "advertised_contact_targets" in audit_src
 assert "mkdtemp" in audit_src
 assert 'WEB-LLM-001", "warn"' in audit_src

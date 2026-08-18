@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.14] - 2026-08-19
+### Fixed
+- Drop unofficial isolate-contact / dedicated-`/contact` hints after
+  `WEB-UX-001` is closed (advertised contact href already has a form).
+  Official UX follows `/?action=contact` when that is what nav/footer
+  advertise. Does not invent a `/contact` finding code.
+
 ## [0.2.13] - 2026-08-19
 ### Fixed
 - Drop title hints that quote a document title no longer observed, or that

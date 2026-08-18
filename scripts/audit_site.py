@@ -497,6 +497,50 @@ def _count_within_budget(item: dict[str, Any], key: str) -> bool:
     return count <= budget
 
 
+def _page_has_form(item: dict[str, Any]) -> bool:
+    return int((item.get("signals") or {}).get("formCount") or 0) > 0 or _page_kind(item) == "form"
+
+
+def official_contact_ux_closed(pages: list[dict[str, Any]]) -> bool:
+    """True when WEB-UX-001 would not fire: advertised contact hrefs have a form.
+
+    Official UX follows the advertised href (including ``/?action=contact``).
+    It does not require a dedicated ``/contact`` route.
+    """
+    contact_hrefs: set[str] = set()
+    for item in pages:
+        sig = item.get("signals") or {}
+        for href in list(sig.get("footerLinks") or []) + list(sig.get("navLinks") or []):
+            if looks_like_contact_href(str(href)):
+                contact_hrefs.add(str(href))
+    if contact_hrefs:
+        for href in contact_hrefs:
+            matched = match_contact_page(pages, href)
+            if matched is None or not _page_has_form(matched):
+                return False
+        return True
+    return any(
+        looks_like_contact_href(str(item.get("url") or "")) and _page_has_form(item)
+        for item in pages
+    )
+
+
+def _isolate_contact_hint(folded: str) -> bool:
+    if "web-ux-001" in folded or "web-ux-002" in folded or "web-mod-001" in folded:
+        return False
+    contactish = "contact" in folded or "?action=contact" in folded
+    if not contactish:
+        return False
+    return bool(
+        "isolate" in folded
+        or "dedicated" in folded
+        or "own page template" in folded
+        or "ux-structure-001" in folded
+        or "modularity-001" in folded
+        or "query param" in folded
+    )
+
+
 def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]:
     """Drop LLM hints that contradict measured titles, headings, or GUI budgets."""
     titles = {_norm_hint_text(_page_title(item)) for item in pages if _page_title(item)}
@@ -531,6 +575,7 @@ def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]
         for item in pages
         if _page_kind(item) == "article" and _h2_count(item) >= 8
     ) if any(_page_kind(item) == "article" and _h2_count(item) >= 8 for item in pages) else False
+    contact_ux_closed = official_contact_ux_closed(pages)
 
     kept: list[str] = []
     for raw in hints:
@@ -586,6 +631,8 @@ def drop_stale_hints(pages: list[dict[str, Any]], hints: list[str]) -> list[str]
             or "table of contents" in folded
             or "in-page navigation" in folded
         ):
+            continue
+        if contact_ux_closed and _isolate_contact_hint(folded):
             continue
         if text not in kept:
             kept.append(text)

@@ -430,7 +430,6 @@ def test_drop_stale_hints_keeps_unresolved_and_drops_closed() -> None:
     ]
     kept = drop_stale_hints(pages, hints)
     assert kept == [
-        "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
         "pages[/legal].structure: Add in-page table of contents.",
         "SEO-TITLE-002: Home title is brand-generic while H1 is package-specific.",
     ]
@@ -439,8 +438,15 @@ def test_drop_stale_hints_keeps_unresolved_and_drops_closed() -> None:
     aligned = drop_stale_hints(pages, [
         "SEO-TITLE-002: Page title 'Subactor — platforma autonomizacji procesów biznesowych' is brand-generic while H1 is package-specific.",
         "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
+        "MODULARITY-001: Contact route uses query param ?action=contact instead of /contact.",
     ])
-    assert aligned == [
+    assert aligned == []
+    pages[1]["signals"]["formCount"] = 0
+    pages[1]["page"]["page"]["kind"] = "landing"
+    open_ux = drop_stale_hints(pages, [
+        "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
+    ])
+    assert open_ux == [
         "UX-STRUCTURE-001: Isolate the contact form on its own page template.",
     ]
 
