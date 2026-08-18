@@ -968,7 +968,7 @@
         "$schema": "https://wellmanifest.com/schemas/gui-page/v1",
         "id": "observed/-action=contact",
         "version": "1.4.0",
-        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "title": "Kontakt — wdrożenie On-Premise | Subactor",
         "placement": {
           "home": "subactor",
           "shape": "runtime_service",
@@ -997,7 +997,7 @@
               },
               {
                 "tag": "H2",
-                "text": "Zapytanie o wdrożenie On-Premise"
+                "text": "Szczegóły instalacji"
               },
               {
                 "tag": "H2",
@@ -1120,7 +1120,7 @@
       },
       "signals": {
         "lang": "pl",
-        "title": "Subactor — platforma autonomizacji procesów biznesowych",
+        "title": "Kontakt — wdrożenie On-Premise | Subactor",
         "viewport": true,
         "canonical": "http://127.0.0.1:8789/",
         "linkCount": 12,
