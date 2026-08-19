@@ -16,7 +16,8 @@ Pack version **0.2.0** (standard document version 1).
 
 ## Invariants
 
-1. Public pages are indexed by `/sitemap.xml` when the LLM judges it missing.
+1. Missing `/sitemap.xml` or `/robots.txt` is `WEB-SITEMAP-001` /
+   `WEB-ROBOTS-001` from the HTTP status, not from the LLM.
 2. Kind, budgets and hints are **not** hardcoded. SubLLM `platform/site-audit`
    returns `wellmanifest.webpage/llm-judgment/v1`. Observation is measured.
 3. URL lists come from the sitemap or homepage links, never a product allowlist.

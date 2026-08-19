@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.15] - 2026-08-19
+### Fixed
+- Normative invariant 1 matches 0.2.1: sitemap/robots findings are HTTP, not
+  LLM. README no longer claims `:8781` has no sitemap; that depends on the
+  serving checkout. Example dir `subactor-8781` may hold a `:8789` capture.
+
 ## [0.2.14] - 2026-08-19
 ### Fixed
 - Drop unofficial isolate-contact / dedicated-`/contact` hints after
